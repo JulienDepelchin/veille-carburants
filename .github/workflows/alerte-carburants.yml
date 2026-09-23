@@ -3,10 +3,15 @@ name: Alerte prix carburants
 on:
   schedule:
     # Heures en UTC. Paris = UTC+2 en ete (CEST, jusqu'a fin octobre), UTC+1 en hiver (CET).
-    - cron: '0 5 * * *'        # ~07h00 Paris -> digest mail + Slack
-    - cron: '0 17 * * *'       # ~19h00 Paris -> digest mail + Slack
-    - cron: '30 4-20/2 * * *'  # toutes les 2h en journee -> verification, Slack UNIQUEMENT si nouveaute
-  workflow_dispatch: {}        # bouton "Run workflow" pour tester manuellement
+    - cron: '0 17 * * *'       # ~19h00 Paris -> digest complet, une fois par jour (mail + Slack)
+    - cron: '30 4-20/2 * * *'  # toutes les 2h en journee -> verification, alerte SEULEMENT si nouveau franchissement
+  workflow_dispatch:           # bouton "Run workflow" pour tester manuellement
+    inputs:
+      mode:
+        description: "Mode a forcer pour ce run manuel"
+        type: choice
+        options: [digest, verification]
+        default: digest
 
 permissions:
   contents: write   # necessaire pour committer le journal (historique_prix_carburants.csv)
@@ -31,8 +36,17 @@ jobs:
           MAIL_TO: ${{ secrets.MAIL_TO }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
-          if [ "${{ github.event.schedule }}" = "0 5 * * *" ] || [ "${{ github.event.schedule }}" = "0 17 * * *" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "Mode digest (mail + Slack complet)"
+          FORCED_MODE="${{ github.event.inputs.mode }}"
+          if [ "$FORCED_MODE" = "verification" ]; then
+            MODE=verification
+          elif [ "$FORCED_MODE" = "digest" ] || [ "${{ github.event.schedule }}" = "0 17 * * *" ]; then
+            MODE=digest
+          else
+            MODE=verification
+          fi
+
+          if [ "$MODE" = "digest" ]; then
+            echo "Mode digest (mail + Slack complet, une fois par jour)"
             export SEND_EMAIL=1
             export SEND_SLACK=1
           else
