@@ -7,3 +7,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-09-23T09:22:34.475371+00:00,france,e10,6909,2.1698,2.649,Verrières-en-Anjou (49480),1.98,Limogne-en-Quercy (46260)
 2026-09-23T09:22:34.475371+00:00,npdc,gazole,434,2.3877,2.689,Grande-Synthe (59760),2.225,Lille (59160)
 2026-09-23T09:22:34.475371+00:00,npdc,e10,374,2.1319,2.449,Grande-Synthe (59760),1.99,La Sentinelle (59174)
+2026-09-23T09:32:49.736077+00:00,france,gazole,8570,2.4097,2.9,Paris (75007),1.395,Saône (25660)
+2026-09-23T09:32:49.736077+00:00,france,e10,6909,2.1698,2.649,Verrières-en-Anjou (49480),1.98,Limogne-en-Quercy (46260)
+2026-09-23T09:32:49.736077+00:00,npdc,gazole,434,2.3877,2.689,Grande-Synthe (59760),2.225,Lille (59160)
+2026-09-23T09:32:49.736077+00:00,npdc,e10,374,2.1319,2.449,Grande-Synthe (59760),1.99,La Sentinelle (59174)
