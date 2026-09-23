@@ -23,3 +23,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-09-23T15:08:16.453435+00:00,france,e10,6913,2.1692,2.649,Verrières-en-Anjou (49480),1.98,Limogne-en-Quercy (46260)
 2026-09-23T15:08:16.453435+00:00,npdc,gazole,439,2.3848,2.689,Grande-Synthe (59760),2.203,Caudry (59540)
 2026-09-23T15:08:16.453435+00:00,npdc,e10,370,2.1327,2.449,Grande-Synthe (59760),1.99,Waziers (59119)
+2026-09-23T19:44:37.148564+00:00,france,gazole,8511,2.4098,2.9,Paris (75007),2.19,Lannilis (29870)
+2026-09-23T19:44:37.148564+00:00,france,e10,6843,2.1708,2.649,Verrières-en-Anjou (49480),1.98,Limogne-en-Quercy (46260)
+2026-09-23T19:44:37.148564+00:00,npdc,gazole,431,2.387,2.689,Grande-Synthe (59760),2.203,Caudry (59540)
+2026-09-23T19:44:37.148564+00:00,npdc,e10,357,2.1376,2.449,Grande-Synthe (59760),1.99,Waziers (59119)
