@@ -202,27 +202,32 @@ def load_previous_averages():
     return prev
 
 
+def eur(value, decimals=3):
+    """Formate un prix a la francaise (virgule, pas point) : eur(2.41) -> '2,410'."""
+    return f"{value:.{decimals}f}".replace(".", ",")
+
+
 def trend_arrow(delta):
     if delta is None:
         return ""
     if delta > 0.0015:
-        return f" ▲ +{delta:.3f} €"
+        return f" ▲ +{eur(delta)} €"
     if delta < -0.0015:
-        return f" ▼ {delta:.3f} €"
+        return f" ▼ {eur(delta)} €"
     return " ▬ stable"
 
 
 # --------------------------------------------------------- presentation --
 def fmt_station(r):
     dep_nom = "Nord" if r["dep"] == "59" else ("Pas-de-Calais" if r["dep"] == "62" else f"dept. {r['dep']}")
-    return f"{r['prix']:.3f} EUR - {r['ville']} ({r['cp']}, {dep_nom}) - {r['adresse']}"
+    return f"{eur(r['prix'])} EUR - {r['ville']} ({r['cp']}, {dep_nom}) - {r['adresse']}"
 
 
 def fmt_crossing(c):
     """Description texte d'un franchissement de seuil (voir compute_threshold_crossings)."""
     scope_label = SCOPE_META[c["scope"]]["label"]
     plural = "s" if c["n"] > 1 else ""
-    return (f"Gazole {scope_label} : {c['n']} station{plural} à {c['seuil']:.2f} € ou plus — "
+    return (f"Gazole {scope_label} : {c['n']} station{plural} à {eur(c['seuil'], 2)} € ou plus — "
             f"la plus chère : {fmt_station(c['station'])}")
 
 
@@ -240,14 +245,14 @@ def build_report_text(rows, run_dt, stats, prev):
             pv = prev.get((scope, fuel))
             if pv is not None:
                 d = s["moy"] - pv
-            lines.append(f"  {fmeta['label']} (n={s['n']}) — moyenne {s['moy']:.3f} EUR/L{trend_arrow(d)}")
+            lines.append(f"  {fmeta['label']} (n={s['n']}) — moyenne {eur(s['moy'])} EUR/L{trend_arrow(d)}")
             lines.append(f"    + cher : {fmt_station(s['max'])}")
             lines.append(f"    - cher : {fmt_station(s['min'])}")
     lines.append("\n## SEUILS GAZOLE")
     for seuil in SEUILS_GAZOLE:
         st = stations_au_dessus(rows, "gazole", seuil)
         st_npdc = [r for r in st if r["dep"] in NPDC_DEPTS]
-        lines.append(f"  >= {seuil:.2f} EUR : {len(st)} stations en France, dont {len(st_npdc)} dans le NPDC")
+        lines.append(f"  >= {eur(seuil, 2)} EUR : {len(st)} stations en France, dont {len(st_npdc)} dans le NPDC")
     return "\n".join(lines)
 
 
@@ -273,11 +278,11 @@ def build_report_html(rows, run_dt, stats, prev, new_crossings):
         <tr>
           <td style="padding:10px 14px;border-bottom:1px solid #eee;">{badge(fuel)}</td>
           <td style="padding:10px 14px;border-bottom:1px solid #eee;font-size:20px;font-weight:700;color:#111;">
-            {s["moy"]:.3f} €<span style="font-size:12px;font-weight:600;color:{trend_color};margin-left:8px;">{trend}</span>
+            {eur(s["moy"])} €<span style="font-size:12px;font-weight:600;color:{trend_color};margin-left:8px;">{trend}</span>
           </td>
           <td style="padding:10px 14px;border-bottom:1px solid #eee;font-size:12.5px;color:#444;">
-            <b>+ cher</b> {s["max"]["prix"]:.3f} € — {s["max"]["ville"]} ({s["max"]["cp"]})<br>
-            <b>- cher</b> {s["min"]["prix"]:.3f} € — {s["min"]["ville"]} ({s["min"]["cp"]})
+            <b>+ cher</b> {eur(s["max"]["prix"])} € — {s["max"]["ville"]} ({s["max"]["cp"]})<br>
+            <b>- cher</b> {eur(s["min"]["prix"])} € — {s["min"]["ville"]} ({s["min"]["cp"]})
           </td>
         </tr>'''
 
@@ -297,7 +302,7 @@ def build_report_html(rows, run_dt, stats, prev, new_crossings):
     for seuil in SEUILS_GAZOLE:
         st = stations_au_dessus(rows, "gazole", seuil)
         st_npdc = [r for r in st if r["dep"] in NPDC_DEPTS]
-        seuils_html += (f'<div style="padding:6px 0;">🟡 <b>≥ {seuil:.2f} €</b> : '
+        seuils_html += (f'<div style="padding:6px 0;">🟡 <b>≥ {eur(seuil, 2)} €</b> : '
                          f'{len(st)} station(s) en France, dont <b>{len(st_npdc)}</b> dans le NPDC</div>')
 
     alert_html = ""
@@ -333,7 +338,7 @@ def build_alert_email(new_crossings, run_dt):
     NPDC) atteint un seuil — independant du digest du matin."""
     if len(new_crossings) == 1:
         c = new_crossings[0]
-        subject = f"🚨 Le gazole atteint {c['seuil']:.2f} € — {SCOPE_META[c['scope']]['label']}"
+        subject = f"🚨 Le gazole atteint {eur(c['seuil'], 2)} € — {SCOPE_META[c['scope']]['label']}"
     else:
         subject = f"🚨 Gazole : {len(new_crossings)} seuil(s) atteint(s)"
 
@@ -370,8 +375,8 @@ def build_slack_blocks(rows, run_dt, stats, prev, new_crossings):
         pv = prev.get((scope, fuel))
         if pv is not None:
             d = s["moy"] - pv
-        txt = f"{m['emoji']} *{m['label']} — {SCOPE_META[scope]['label']}*\n*{s['moy']:.3f} €*{trend_arrow(d)}"
-        txt += f"\n{s['max']['prix']:.3f} € {s['max']['ville']} ↔ {s['min']['prix']:.3f} € {s['min']['ville']}"
+        txt = f"{m['emoji']} *{m['label']} — {SCOPE_META[scope]['label']}*\n*{eur(s['moy'])} €*{trend_arrow(d)}"
+        txt += f"\n{eur(s['max']['prix'])} € {s['max']['ville']} ↔ {eur(s['min']['prix'])} € {s['min']['ville']}"
         return {"type": "mrkdwn", "text": txt}
 
     # Meme regroupement que le mail : un bloc par perimetre (France, puis NPDC),
