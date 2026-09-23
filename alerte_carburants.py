@@ -306,7 +306,7 @@ def build_report_html(rows, run_dt, stats, prev, new_crossings):
 
 
 def build_slack_blocks(rows, run_dt, stats, prev, new_crossings):
-    def field(scope, fuel, with_range):
+    def field(scope, fuel):
         s = stats[(scope, fuel)]
         if not s:
             return None
@@ -316,15 +316,16 @@ def build_slack_blocks(rows, run_dt, stats, prev, new_crossings):
         if pv is not None:
             d = s["moy"] - pv
         txt = f"{m['emoji']} *{m['label']} — {SCOPE_META[scope]['label']}*\n*{s['moy']:.3f} €*{trend_arrow(d)}"
-        if with_range:
-            txt += f"\n{s['max']['prix']:.3f} € {s['max']['ville']} ↔ {s['min']['prix']:.3f} € {s['min']['ville']}"
+        txt += f"\n{s['max']['prix']:.3f} € {s['max']['ville']} ↔ {s['min']['prix']:.3f} € {s['min']['ville']}"
         return {"type": "mrkdwn", "text": txt}
 
+    # Meme regroupement que le mail : un bloc par perimetre (France, puis NPDC),
+    # gazole et SP95-E10 cote a cote dans chaque bloc.
     blocks = [
         {"type": "header", "text": {"type": "plain_text", "text": f"⛽ Prix carburants — {run_dt.strftime('%d/%m %Hh%M')}", "emoji": True}},
-        {"type": "section", "fields": [field("france", "gazole", True), field("npdc", "gazole", True)]},
-        {"type": "section", "fields": [field("france", "e10", False), field("npdc", "e10", False)]},
     ]
+    for scope in SCOPE_META:
+        blocks.append({"type": "section", "fields": [field(scope, "gazole"), field(scope, "e10")]})
     n299 = len(stations_au_dessus(rows, "gazole", 2.99))
     n300 = len(stations_au_dessus(rows, "gazole", 3.00))
     blocks.append({"type": "context", "elements": [{"type": "mrkdwn",
