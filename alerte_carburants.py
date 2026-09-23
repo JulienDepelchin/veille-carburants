@@ -44,7 +44,7 @@ HERE = Path(__file__).resolve().parent
 STATE_FILE = HERE / "alert_state.json"
 LOG_FILE = HERE / "historique_prix_carburants.csv"
 NPDC_DEPTS = {"59", "62"}
-SEUILS_GAZOLE = [2.50, 2.99, 3.00]   # 2.50 = TEST TEMPORAIRE, a retirer une fois l'alerte verifiee
+SEUILS_GAZOLE = [2.99, 3.00]   # seuils psychologiques a surveiller
 FUELS = {"gazole": "1", "e10": "5"}
 API_BASE = "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/exports/json"
 
