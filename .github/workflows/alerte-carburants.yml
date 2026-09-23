@@ -1,0 +1,52 @@
+name: Alerte prix carburants
+
+on:
+  schedule:
+    # Heures en UTC. Paris = UTC+2 en ete (CEST, jusqu'a fin octobre), UTC+1 en hiver (CET).
+    - cron: '0 5 * * *'        # ~07h00 Paris -> digest mail + Slack
+    - cron: '0 17 * * *'       # ~19h00 Paris -> digest mail + Slack
+    - cron: '30 4-20/2 * * *'  # toutes les 2h en journee -> verification, Slack UNIQUEMENT si nouveaute
+  workflow_dispatch: {}        # bouton "Run workflow" pour tester manuellement
+
+permissions:
+  contents: write   # necessaire pour committer le journal (historique_prix_carburants.csv)
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Calcule les prix et envoie les notifications
+        env:
+          SMTP_HOST: smtp.gmail.com
+          SMTP_PORT: '587'
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_FROM: ${{ secrets.SMTP_USER }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          if [ "${{ github.event.schedule }}" = "0 5 * * *" ] || [ "${{ github.event.schedule }}" = "0 17 * * *" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Mode digest (mail + Slack complet)"
+            export SEND_EMAIL=1
+            export SEND_SLACK=1
+          else
+            echo "Mode verification (Slack seulement si nouveau franchissement)"
+            export SEND_EMAIL=0
+            export SEND_SLACK=1
+            export SLACK_ONLY_ON_ALERT=1
+          fi
+          python alerte_carburants.py
+
+      - name: Committe le journal et l'etat des alertes
+        run: |
+          git config user.name "alerte-carburants-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add historique_prix_carburants.csv alert_state.json
+          git diff --cached --quiet || git commit -m "Maj prix carburants $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push
