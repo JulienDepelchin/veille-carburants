@@ -5,8 +5,9 @@ Alerte prix carburants — France + Nord/Pas-de-Calais
 ======================================================
 
 Calcule un prix moyen fiable (methode AFP, cf. memoire projet) a partir du flux
-instantane officiel, national et regional (NPDC = 59+62), et alerte quand des
-stations franchissent 2,99 EUR ou 3,00 EUR le litre de gazole.
+instantane officiel, national et regional (NPDC = 59+62), et alerte quand la
+MOYENNE gazole (France ou NPDC — pas une station isolee) franchit 2,99 EUR ou
+3,00 EUR le litre.
 
 Concu pour tourner plusieurs fois par jour (cron / GitHub Actions) sans etat
 partage entre executions autre que le fichier alert_state.json (deduplication
@@ -216,6 +217,13 @@ def fmt_station(r):
     return f"{r['prix']:.3f} EUR - {r['ville']} ({r['cp']}, {dep_nom}) - {r['adresse']}"
 
 
+def fmt_crossing(c):
+    """Description texte d'un franchissement de moyenne (voir compute_avg_crossings)."""
+    scope_label = SCOPE_META[c["scope"]]["label"]
+    return (f"Gazole {scope_label} : moyenne {c['moy']:.3f} EUR/L, vient de franchir {c['seuil']:.2f} EUR — "
+            f"+ cher {fmt_station(c['stats']['max'])} · - cher {fmt_station(c['stats']['min'])}")
+
+
 def build_report_text(rows, run_dt, stats, prev):
     """Version texte brut — log console + secours mail texte."""
     lines = [f"PRIX DES CARBURANTS — {fmt_date_fr(run_dt)} (heure de Paris)", "=" * 60]
@@ -292,10 +300,10 @@ def build_report_html(rows, run_dt, stats, prev, new_crossings):
 
     alert_html = ""
     if new_crossings:
-        items = "".join(f'<li style="margin:4px 0;">{fmt_station(r)}</li>' for r in new_crossings[:20])
+        items = "".join(f'<li style="margin:6px 0;">{fmt_crossing(c)}</li>' for c in new_crossings)
         alert_html = f'''
         <div style="background:#fff4e5;border:1px solid #f0b429;border-radius:8px;padding:14px 16px;margin-bottom:22px;">
-          <div style="font-weight:700;color:#8a5a00;margin-bottom:6px;">🚨 {len(new_crossings)} nouvelle(s) station(s) au-dessus d'un seuil</div>
+          <div style="font-weight:700;color:#8a5a00;margin-bottom:6px;">🚨 La moyenne gazole vient de franchir un seuil</div>
           <ul style="margin:0;padding-left:18px;color:#5c4a00;font-size:13px;">{items}</ul>
         </div>'''
 
@@ -318,42 +326,32 @@ def build_report_html(rows, run_dt, stats, prev, new_crossings):
 </body></html>'''
 
 
-def build_alert_email(new_crossings, stats, run_dt):
-    """Mail court, envoye uniquement quand de nouvelles stations franchissent
-    un seuil — independant du digest du matin/soir."""
-    prix_max = max(r["prix"] for r in new_crossings)
-    subject = f"🚨 Gazole : {len(new_crossings)} station(s) au-dessus d'un seuil (jusqu'à {prix_max:.2f} €)"
+def build_alert_email(new_crossings, run_dt):
+    """Mail court, envoye uniquement quand la moyenne gazole (France ou NPDC)
+    franchit un seuil — independant du digest du matin."""
+    if len(new_crossings) == 1:
+        c = new_crossings[0]
+        subject = f"🚨 Le gazole dépasse {c['seuil']:.2f} € en moyenne — {SCOPE_META[c['scope']]['label']}"
+    else:
+        subject = f"🚨 Gazole : {len(new_crossings)} seuil(s) franchi(s) en moyenne"
 
     lines = [f"ALERTE GAZOLE — {fmt_date_fr(run_dt)} (heure de Paris)", "=" * 60, ""]
-    for r in new_crossings:
-        lines.append(f"  {fmt_station(r)}")
-    lines.append("")
-    fg, ng = stats.get(("france", "gazole")), stats.get(("npdc", "gazole"))
-    if fg:
-        lines.append(f"Pour mémoire — moyenne gazole France : {fg['moy']:.3f} EUR/L")
-    if ng:
-        lines.append(f"Pour mémoire — moyenne gazole NPDC : {ng['moy']:.3f} EUR/L")
+    for c in new_crossings:
+        lines.append(f"  {fmt_crossing(c)}")
     text = "\n".join(lines)
 
-    items = "".join(f'<li style="margin:5px 0;">{fmt_station(r)}</li>' for r in new_crossings[:30])
-    fg_html = f"Moyenne France : <b>{fg['moy']:.3f} €</b>" if fg else ""
-    ng_html = f"Moyenne NPDC : <b>{ng['moy']:.3f} €</b>" if ng else ""
+    items = "".join(f'<li style="margin:8px 0;">{fmt_crossing(c)}</li>' for c in new_crossings)
     html = f'''<!doctype html>
 <html><body style="margin:0;padding:24px;background:#f6f6f4;font-family:-apple-system,Segoe UI,Arial,sans-serif;">
   <div style="max-width:640px;margin:0 auto;">
     <div style="font-size:20px;font-weight:800;color:#111;margin-bottom:2px;">🚨 Seuil gazole franchi</div>
     <div style="font-size:12.5px;color:#888;margin-bottom:20px;">{fmt_date_fr(run_dt)} (heure de Paris)</div>
     <div style="background:#fff4e5;border:1px solid #f0b429;border-radius:8px;padding:14px 16px;margin-bottom:16px;">
-      <div style="font-weight:700;color:#8a5a00;margin-bottom:6px;">
-        {len(new_crossings)} nouvelle(s) station(s) 🟡 Gazole au-dessus d'un seuil
-      </div>
+      <div style="font-weight:700;color:#8a5a00;margin-bottom:6px;">🟡 La moyenne gazole vient de franchir un seuil</div>
       <ul style="margin:0;padding-left:18px;color:#5c4a00;font-size:13.5px;">{items}</ul>
     </div>
-    <div style="background:#f0f0ee;border-radius:8px;padding:12px 16px;font-size:13px;color:#333;">
-      {fg_html}{" · " if fg_html and ng_html else ""}{ng_html}
-    </div>
     <div style="font-size:11px;color:#aaa;margin-top:18px;">
-      Détection automatique — vérification toutes les 2 heures. Le digest complet suit à 7h et 19h.
+      Détection automatique — vérification toutes les 2 heures. Le digest complet suit à 9h.
     </div>
   </div>
 </body></html>'''
@@ -388,10 +386,8 @@ def build_slack_blocks(rows, run_dt, stats, prev, new_crossings):
 
     if new_crossings:
         blocks.append({"type": "divider"})
-        txt = f":rotating_light: *{len(new_crossings)} nouvelle(s) station(s) au-dessus d'un seuil*\n"
-        txt += "\n".join(f"• {fmt_station(r)}" for r in new_crossings[:10])
-        if len(new_crossings) > 10:
-            txt += f"\n… et {len(new_crossings) - 10} de plus"
+        txt = ":rotating_light: *La moyenne gazole vient de franchir un seuil*\n"
+        txt += "\n".join(f"• {fmt_crossing(c)}" for c in new_crossings)
         blocks.append({"type": "section", "text": {"type": "mrkdwn", "text": txt}})
 
     return blocks
@@ -401,24 +397,35 @@ def build_slack_blocks(rows, run_dt, stats, prev, new_crossings):
 def load_state():
     if STATE_FILE.exists():
         return json.loads(STATE_FILE.read_text(encoding="utf-8"))
-    return {"alerted_ids": {}}
+    return {"alerted_avg": {}}
 
 
 def save_state(state):
     STATE_FILE.write_text(json.dumps(state, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
-def compute_new_crossings(rows, state):
+def compute_avg_crossings(stats, state):
+    """Alerte sur la MOYENNE (France ou NPDC), pas station par station — une
+    station isolee au-dessus d'un seuil ne veut rien dire en soi (il y en a
+    en permanence), alors que la moyenne qui franchit un cap est un vrai
+    signal. Contrairement au suivi station par station, celui-ci se
+    'rearme' : si la moyenne repasse sous le seuil puis le refranchit plus
+    tard, une nouvelle alerte repart (pertinent a ce niveau d'agregation,
+    contrairement au niveau station ou ca creerait du bruit)."""
     new = []
-    alerted = state.setdefault("alerted_ids", {})
-    for seuil in SEUILS_GAZOLE:
-        key = f"gazole_{seuil:.2f}"
-        seen = set(alerted.get(key, []))
-        for r in stations_au_dessus(rows, "gazole", seuil):
-            if str(r["id"]) not in seen:
-                new.append(r)
-                seen.add(str(r["id"]))
-        alerted[key] = sorted(seen)
+    alerted = state.setdefault("alerted_avg", {})
+    for scope in SCOPE_META:
+        s = stats.get((scope, "gazole"))
+        if not s:
+            continue
+        for seuil in SEUILS_GAZOLE:
+            key = f"{scope}_{seuil:.2f}"
+            deja_signale = alerted.get(key, False)
+            if s["moy"] >= seuil and not deja_signale:
+                new.append({"scope": scope, "seuil": seuil, "moy": s["moy"], "stats": s})
+                alerted[key] = True
+            elif s["moy"] < seuil and deja_signale:
+                alerted[key] = False  # repasse en dessous -> se rearme pour un futur franchissement
     return new
 
 
@@ -485,7 +492,7 @@ def main():
     print(f"[run] {len(rows)} lignes station x carburant apres filtres AFP")
 
     state = load_state()
-    new_crossings = compute_new_crossings(rows, state)
+    new_crossings = compute_avg_crossings(stats, state)
 
     text_report = build_report_text(rows, now_paris, stats, prev)
     print("\n" + text_report + "\n")
@@ -500,7 +507,7 @@ def main():
         # Mail dedie, independant du digest : part immediatement des qu'un
         # nouveau franchissement est detecte (pas de doublon avec le digest
         # du jour meme grace a la dedup dans alert_state.json).
-        subject, text_alert, html_alert = build_alert_email(new_crossings, stats, now_paris)
+        subject, text_alert, html_alert = build_alert_email(new_crossings, now_paris)
         send_email(subject, text_alert, html_alert)
     if os.environ.get("SEND_SLACK") == "1":
         if os.environ.get("SLACK_ONLY_ON_ALERT") != "1" or new_crossings:
@@ -509,7 +516,7 @@ def main():
             send_slack(blocks, fallback)
 
     if new_crossings:
-        print(f"[alerte] {len(new_crossings)} nouvelle(s) station(s) au-dessus d'un seuil gazole")
+        print(f"[alerte] {len(new_crossings)} franchissement(s) de moyenne gazole")
 
 
 if __name__ == "__main__":
