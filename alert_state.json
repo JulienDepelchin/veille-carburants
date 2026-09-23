@@ -2,5 +2,6 @@
  "alerted_ids": {
   "gazole_2.99": [],
   "gazole_3.00": []
- }
+ },
+ "alerted_threshold": {}
 }
