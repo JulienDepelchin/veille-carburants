@@ -443,20 +443,22 @@ def append_log(stats, run_dt):
 def send_email(subject, text_body, html_body):
     host, port = os.environ.get("SMTP_HOST"), int(os.environ.get("SMTP_PORT", "587"))
     user, pw = os.environ.get("SMTP_USER"), os.environ.get("SMTP_PASS")
-    mfrom, mto = os.environ.get("MAIL_FROM", user), os.environ.get("MAIL_TO")
-    if not all([host, user, pw, mfrom, mto]):
+    mfrom, mto_raw = os.environ.get("MAIL_FROM", user), os.environ.get("MAIL_TO")
+    if not all([host, user, pw, mfrom, mto_raw]):
         print("[mail] variables SMTP manquantes, envoi ignore", file=sys.stderr)
         return
+    # MAIL_TO peut contenir plusieurs adresses separees par des virgules.
+    destinataires = [a.strip() for a in mto_raw.split(",") if a.strip()]
     msg = MIMEMultipart("alternative")
-    msg["Subject"], msg["From"], msg["To"] = subject, mfrom, mto
+    msg["Subject"], msg["From"], msg["To"] = subject, mfrom, ", ".join(destinataires)
     msg.attach(MIMEText(text_body, "plain", "utf-8"))
     msg.attach(MIMEText(html_body, "html", "utf-8"))
     ctx = ssl.create_default_context()
     with smtplib.SMTP(host, port, timeout=30) as s:
         s.starttls(context=ctx)
         s.login(user, pw)
-        s.sendmail(mfrom, [mto], msg.as_string())
-    print(f"[mail] envoye a {mto}")
+        s.sendmail(mfrom, destinataires, msg.as_string())
+    print(f"[mail] envoye a {', '.join(destinataires)}")
 
 
 def send_slack(blocks, fallback_text):
