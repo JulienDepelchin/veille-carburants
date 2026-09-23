@@ -305,6 +305,48 @@ def build_report_html(rows, run_dt, stats, prev, new_crossings):
 </body></html>'''
 
 
+def build_alert_email(new_crossings, stats, run_dt):
+    """Mail court, envoye uniquement quand de nouvelles stations franchissent
+    un seuil — independant du digest du matin/soir."""
+    prix_max = max(r["prix"] for r in new_crossings)
+    subject = f"🚨 Gazole : {len(new_crossings)} station(s) au-dessus d'un seuil (jusqu'à {prix_max:.2f} €)"
+
+    lines = [f"ALERTE GAZOLE — {run_dt.strftime('%A %d %B %Y, %Hh%M')} (heure UTC)", "=" * 60, ""]
+    for r in new_crossings:
+        lines.append(f"  {fmt_station(r)}")
+    lines.append("")
+    fg, ng = stats.get(("france", "gazole")), stats.get(("npdc", "gazole"))
+    if fg:
+        lines.append(f"Pour mémoire — moyenne gazole France : {fg['moy']:.3f} EUR/L")
+    if ng:
+        lines.append(f"Pour mémoire — moyenne gazole NPDC : {ng['moy']:.3f} EUR/L")
+    text = "\n".join(lines)
+
+    items = "".join(f'<li style="margin:5px 0;">{fmt_station(r)}</li>' for r in new_crossings[:30])
+    fg_html = f"Moyenne France : <b>{fg['moy']:.3f} €</b>" if fg else ""
+    ng_html = f"Moyenne NPDC : <b>{ng['moy']:.3f} €</b>" if ng else ""
+    html = f'''<!doctype html>
+<html><body style="margin:0;padding:24px;background:#f6f6f4;font-family:-apple-system,Segoe UI,Arial,sans-serif;">
+  <div style="max-width:640px;margin:0 auto;">
+    <div style="font-size:20px;font-weight:800;color:#111;margin-bottom:2px;">🚨 Seuil gazole franchi</div>
+    <div style="font-size:12.5px;color:#888;margin-bottom:20px;">{run_dt.strftime('%A %d %B %Y — %Hh%M')} (heure UTC)</div>
+    <div style="background:#fff4e5;border:1px solid #f0b429;border-radius:8px;padding:14px 16px;margin-bottom:16px;">
+      <div style="font-weight:700;color:#8a5a00;margin-bottom:6px;">
+        {len(new_crossings)} nouvelle(s) station(s) 🟡 Gazole au-dessus d'un seuil
+      </div>
+      <ul style="margin:0;padding-left:18px;color:#5c4a00;font-size:13.5px;">{items}</ul>
+    </div>
+    <div style="background:#f0f0ee;border-radius:8px;padding:12px 16px;font-size:13px;color:#333;">
+      {fg_html}{" · " if fg_html and ng_html else ""}{ng_html}
+    </div>
+    <div style="font-size:11px;color:#aaa;margin-top:18px;">
+      Détection automatique — vérification toutes les 2 heures. Le digest complet suit à 7h et 19h.
+    </div>
+  </div>
+</body></html>'''
+    return subject, text, html
+
+
 def build_slack_blocks(rows, run_dt, stats, prev, new_crossings):
     def field(scope, fuel):
         s = stats[(scope, fuel)]
@@ -438,6 +480,12 @@ def main():
     if os.environ.get("SEND_EMAIL") == "1":
         html_report = build_report_html(rows, now, stats, prev, new_crossings)
         send_email(f"⛽ Prix carburants — {now.strftime('%d/%m %Hh%M')}", text_report, html_report)
+    elif new_crossings and os.environ.get("SEND_ALERT_EMAIL") == "1":
+        # Mail dedie, independant du digest : part immediatement des qu'un
+        # nouveau franchissement est detecte (pas de doublon avec le digest
+        # du jour meme grace a la dedup dans alert_state.json).
+        subject, text_alert, html_alert = build_alert_email(new_crossings, stats, now)
+        send_email(subject, text_alert, html_alert)
     if os.environ.get("SEND_SLACK") == "1":
         if os.environ.get("SLACK_ONLY_ON_ALERT") != "1" or new_crossings:
             blocks = build_slack_blocks(rows, now, stats, prev, new_crossings)

@@ -36,8 +36,9 @@ jobs:
             export SEND_EMAIL=1
             export SEND_SLACK=1
           else
-            echo "Mode verification (Slack seulement si nouveau franchissement)"
+            echo "Mode verification (mail + Slack seulement si nouveau franchissement)"
             export SEND_EMAIL=0
+            export SEND_ALERT_EMAIL=1
             export SEND_SLACK=1
             export SLACK_ONLY_ON_ALERT=1
           fi
