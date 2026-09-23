@@ -2,9 +2,11 @@ name: Alerte prix carburants
 
 on:
   schedule:
-    # Heures en UTC. Paris = UTC+2 en ete (CEST, jusqu'a fin octobre), UTC+1 en hiver (CET).
-    - cron: '0 17 * * *'       # ~19h00 Paris -> digest complet, une fois par jour (mail + Slack)
-    - cron: '30 4-20/2 * * *'  # toutes les 2h en journee -> verification, alerte SEULEMENT si nouveau franchissement
+    # Heures de declenchement en UTC (Paris = UTC+2 l'ete/CEST, UTC+1 l'hiver/CET —
+    # le contenu affiche s'ajuste automatiquement, mais CES horaires de declenchement
+    # se decaleront d'1h par rapport a Paris apres le changement d'heure fin octobre).
+    - cron: '0 7 * * *'    # ~09h00 Paris -> digest complet, une fois par jour (mail + Slack)
+    - cron: '30 */2 * * *' # toutes les 2h, 24h/24 -> verification, alerte immediate si nouveau franchissement
   workflow_dispatch:           # bouton "Run workflow" pour tester manuellement
     inputs:
       mode:
@@ -39,7 +41,7 @@ jobs:
           FORCED_MODE="${{ github.event.inputs.mode }}"
           if [ "$FORCED_MODE" = "verification" ]; then
             MODE=verification
-          elif [ "$FORCED_MODE" = "digest" ] || [ "${{ github.event.schedule }}" = "0 17 * * *" ]; then
+          elif [ "$FORCED_MODE" = "digest" ] || [ "${{ github.event.schedule }}" = "0 7 * * *" ]; then
             MODE=digest
           else
             MODE=verification
