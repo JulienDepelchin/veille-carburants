@@ -34,6 +34,16 @@ from pathlib import Path
 
 PARIS_TZ = ZoneInfo("Europe/Paris")
 
+_JOURS_FR = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"]
+_MOIS_FR = ["janvier", "février", "mars", "avril", "mai", "juin",
+            "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
+
+
+def fmt_date_fr(dt):
+    """'mercredi 23 septembre 2026 — 11h41' — a la francaise, sans dependre de la
+    locale systeme (non garantie sur le runner GitHub Actions)."""
+    return f"{_JOURS_FR[dt.weekday()]} {dt.day} {_MOIS_FR[dt.month - 1]} {dt.year} — {dt.strftime('%Hh%M')}"
+
 # Console Windows (cp1252) recrache une erreur sur les fleches/emoji unicode des
 # messages ; GitHub Actions (Ubuntu, UTF-8) n'en a pas besoin mais ca ne genera pas.
 for _stream in (sys.stdout, sys.stderr):
@@ -208,7 +218,7 @@ def fmt_station(r):
 
 def build_report_text(rows, run_dt, stats, prev):
     """Version texte brut — log console + secours mail texte."""
-    lines = [f"PRIX DES CARBURANTS — {run_dt.strftime('%A %d %B %Y, %Hh%M')} (heure de Paris)", "=" * 60]
+    lines = [f"PRIX DES CARBURANTS — {fmt_date_fr(run_dt)} (heure de Paris)", "=" * 60]
     for scope, smeta in SCOPE_META.items():
         lines.append(f"\n## {smeta['label'].upper()}")
         for fuel, fmeta in FUEL_META.items():
@@ -293,7 +303,7 @@ def build_report_html(rows, run_dt, stats, prev, new_crossings):
 <html><body style="margin:0;padding:24px;background:#f6f6f4;font-family:-apple-system,Segoe UI,Arial,sans-serif;">
   <div style="max-width:640px;margin:0 auto;">
     <div style="font-size:20px;font-weight:800;color:#111;margin-bottom:2px;">⛽ Prix des carburants</div>
-    <div style="font-size:12.5px;color:#888;margin-bottom:20px;">{run_dt.strftime('%A %d %B %Y — %Hh%M')} (heure de Paris)</div>
+    <div style="font-size:12.5px;color:#888;margin-bottom:20px;">{fmt_date_fr(run_dt)} (heure de Paris)</div>
     {alert_html}
     {scope_block("france")}
     {scope_block("npdc")}
@@ -314,7 +324,7 @@ def build_alert_email(new_crossings, stats, run_dt):
     prix_max = max(r["prix"] for r in new_crossings)
     subject = f"🚨 Gazole : {len(new_crossings)} station(s) au-dessus d'un seuil (jusqu'à {prix_max:.2f} €)"
 
-    lines = [f"ALERTE GAZOLE — {run_dt.strftime('%A %d %B %Y, %Hh%M')} (heure de Paris)", "=" * 60, ""]
+    lines = [f"ALERTE GAZOLE — {fmt_date_fr(run_dt)} (heure de Paris)", "=" * 60, ""]
     for r in new_crossings:
         lines.append(f"  {fmt_station(r)}")
     lines.append("")
@@ -332,7 +342,7 @@ def build_alert_email(new_crossings, stats, run_dt):
 <html><body style="margin:0;padding:24px;background:#f6f6f4;font-family:-apple-system,Segoe UI,Arial,sans-serif;">
   <div style="max-width:640px;margin:0 auto;">
     <div style="font-size:20px;font-weight:800;color:#111;margin-bottom:2px;">🚨 Seuil gazole franchi</div>
-    <div style="font-size:12.5px;color:#888;margin-bottom:20px;">{run_dt.strftime('%A %d %B %Y — %Hh%M')} (heure de Paris)</div>
+    <div style="font-size:12.5px;color:#888;margin-bottom:20px;">{fmt_date_fr(run_dt)} (heure de Paris)</div>
     <div style="background:#fff4e5;border:1px solid #f0b429;border-radius:8px;padding:14px 16px;margin-bottom:16px;">
       <div style="font-weight:700;color:#8a5a00;margin-bottom:6px;">
         {len(new_crossings)} nouvelle(s) station(s) 🟡 Gazole au-dessus d'un seuil
