@@ -27,8 +27,8 @@ Usage :
   python alerte_carburants.py                              # calcule, affiche, log, PAS d'envoi
   SEND_EMAIL=1 SEND_SLACK=1 python alerte_carburants.py     # calcule + envoie
 """
-import os, sys, json, csv, gzip, smtplib, ssl, urllib.request, urllib.parse
-from datetime import datetime, timezone
+import os, sys, json, csv, gzip, copy, smtplib, ssl, urllib.request, urllib.parse
+from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -57,6 +57,7 @@ STATE_FILE = HERE / "alert_state.json"
 LOG_FILE = HERE / "historique_prix_carburants.csv"
 NPDC_DEPTS = {"59", "62"}
 SEUILS_GAZOLE = [2.99, 3.00]   # seuils psychologiques a surveiller
+DIGEST_HOUR = int(os.environ.get("DIGEST_HOUR", "9"))   # heure de Paris a partir de laquelle le digest du jour est du
 FUELS = {"gazole": "1", "e10": "5"}
 API_BASE = "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/exports/json"
 
@@ -187,19 +188,28 @@ def stations_au_dessus(rows, fuel, seuil, dep_filter=None):
 
 
 # --------------------------------------------------------- tendance -------
-def load_previous_averages():
-    """Dernier prix_moyen connu par (perimetre, carburant), lu dans le journal
-    AVANT que ce run n'y ajoute ses propres lignes."""
-    prev = {}
+def load_reference_averages(now_utc, hours=24):
+    """Moyenne connue ~24 h plus tot, par (perimetre, carburant) : derniere ligne
+    du journal anterieure a now-24h ; a defaut (journal plus jeune), la plus
+    ancienne. Renvoie {(scope, fuel): (moyenne, age_en_heures)}. Lu AVANT que ce
+    run n'ajoute ses propres lignes."""
     if not LOG_FILE.exists():
-        return prev
+        return {}
+    limit = now_utc - timedelta(hours=hours)
+    oldest, ref = {}, {}
     with open(LOG_FILE, encoding="utf-8") as f:
         for row in csv.DictReader(f):
             try:
-                prev[(row["perimetre"], row["carburant"])] = float(row["prix_moyen"])
+                ts = datetime.fromisoformat(row["horodatage_utc"])
+                key = (row["perimetre"], row["carburant"])
+                avg = float(row["prix_moyen"])
             except (KeyError, ValueError):
                 continue
-    return prev
+            oldest.setdefault(key, (avg, ts))
+            if ts <= limit:
+                ref[key] = (avg, ts)   # journal chronologique -> on garde la plus recente <= limite
+    return {key: (avg, (now_utc - ts).total_seconds() / 3600)
+            for key, (avg, ts) in ((k, ref.get(k, oldest[k])) for k in oldest)}
 
 
 def eur(value, decimals=3):
@@ -207,14 +217,22 @@ def eur(value, decimals=3):
     return f"{value:.{decimals}f}".replace(".", ",")
 
 
-def trend_arrow(delta):
-    if delta is None:
+def trend_text(prev, scope, fuel, current):
+    """' ▲ +0,004 € vs hier' — evolution de la moyenne depuis ~24 h. Vide si on
+    n'a pas de reference assez ancienne (< 3 h) pour parler de tendance."""
+    ref = prev.get((scope, fuel))
+    if not ref:
         return ""
+    avg, age_h = ref
+    if age_h < 3:
+        return ""
+    delta = current - avg
+    label = "vs hier" if age_h >= 20 else f"vs il y a {round(age_h)} h"
     if delta > 0.0015:
-        return f" ▲ +{eur(delta)} €"
+        return f" ▲ +{eur(delta)} € {label}"
     if delta < -0.0015:
-        return f" ▼ {eur(delta)} €"
-    return " ▬ stable"
+        return f" ▼ {eur(delta)} € {label}"
+    return f" ▬ stable {label}"
 
 
 # --------------------------------------------------------- presentation --
@@ -241,11 +259,7 @@ def build_report_text(rows, run_dt, stats, prev):
             if not s:
                 lines.append(f"  {fmeta['label']} : pas de donnee valide")
                 continue
-            d = None
-            pv = prev.get((scope, fuel))
-            if pv is not None:
-                d = s["moy"] - pv
-            lines.append(f"  {fmeta['label']} (n={s['n']}) — moyenne {eur(s['moy'])} EUR/L{trend_arrow(d)}")
+            lines.append(f"  {fmeta['label']} (n={s['n']}) — moyenne {eur(s['moy'])} EUR/L{trend_text(prev, scope, fuel, s['moy'])}")
             lines.append(f"    + cher : {fmt_station(s['max'])}")
             lines.append(f"    - cher : {fmt_station(s['min'])}")
     lines.append("\n## SEUILS GAZOLE")
@@ -268,11 +282,7 @@ def build_report_html(rows, run_dt, stats, prev, new_crossings):
         s = stats[(scope, fuel)]
         if not s:
             return ""
-        d = None
-        pv = prev.get((scope, fuel))
-        if pv is not None:
-            d = s["moy"] - pv
-        trend = trend_arrow(d).strip()
+        trend = trend_text(prev, scope, fuel, s["moy"]).strip()
         trend_color = "#c0392b" if trend.startswith("▲") else ("#1e7e46" if trend.startswith("▼") else "#8a8a8a")
         return f'''
         <tr>
@@ -371,11 +381,7 @@ def build_slack_blocks(rows, run_dt, stats, prev, new_crossings):
         if not s:
             return None
         m = FUEL_META[fuel]
-        d = None
-        pv = prev.get((scope, fuel))
-        if pv is not None:
-            d = s["moy"] - pv
-        txt = f"{m['emoji']} *{m['label']} — {SCOPE_META[scope]['label']}*\n*{eur(s['moy'])} €*{trend_arrow(d)}"
+        txt = f"{m['emoji']} *{m['label']} — {SCOPE_META[scope]['label']}*\n*{eur(s['moy'])} €*{trend_text(prev, scope, fuel, s['moy'])}"
         txt += f"\n{eur(s['max']['prix'])} € {s['max']['ville']} ↔ {eur(s['min']['prix'])} € {s['min']['ville']}"
         return {"type": "mrkdwn", "text": txt}
 
@@ -461,7 +467,7 @@ def send_email(subject, text_body, html_body):
     mfrom, mto_raw = os.environ.get("MAIL_FROM", user), os.environ.get("MAIL_TO")
     if not all([host, user, pw, mfrom, mto_raw]):
         print("[mail] variables SMTP manquantes, envoi ignore", file=sys.stderr)
-        return
+        return False
     # MAIL_TO peut contenir plusieurs adresses separees par des virgules.
     destinataires = [a.strip() for a in mto_raw.split(",") if a.strip()]
     msg = MIMEMultipart("alternative")
@@ -474,21 +480,35 @@ def send_email(subject, text_body, html_body):
         s.login(user, pw)
         s.sendmail(mfrom, destinataires, msg.as_string())
     print(f"[mail] envoye a {', '.join(destinataires)}")
+    return True
 
 
 def send_slack(blocks, fallback_text):
     url = os.environ.get("SLACK_WEBHOOK_URL")
     if not url:
         print("[slack] SLACK_WEBHOOK_URL manquant, envoi ignore", file=sys.stderr)
-        return
+        return False
     payload = {"text": fallback_text, "blocks": blocks}
     req = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"),
                                   headers={"Content-Type": "application/json"})
     urllib.request.urlopen(req, timeout=15)
     print("[slack] envoye")
+    return True
 
 
 # ---------------------------------------------------------------- main ----
+def digest_due(now_paris, state, forced, auto_enabled, hour=DIGEST_HOUR):
+    """Vrai s'il faut envoyer le digest complet maintenant : soit declenchement
+    force (bouton manuel), soit 'auto-reparation' — premier run apres `hour` h
+    (heure de Paris) si le digest du jour n'est pas encore parti. Ainsi, meme si
+    GitHub saute le run de 9h pile (les crons planifies sont 'best effort'),
+    le digest part au run suivant plutot que jamais."""
+    if forced:
+        return True
+    return (auto_enabled and now_paris.hour >= hour
+            and state.get("last_digest_date") != now_paris.date().isoformat())
+
+
 def main():
     now = datetime.now(timezone.utc)          # horodatage interne (age des prix, journal) — reste en UTC, sans ambiguite DST
     now_paris = now.astimezone(PARIS_TZ)       # horodatage AFFICHE dans les messages — toujours l'heure de Paris, ete/hiver
@@ -496,35 +516,70 @@ def main():
     records = fetch_flux()
     rows = extract(records, now)
     stats = all_stats(rows)
-    prev = load_previous_averages()  # AVANT d'ecrire le journal de ce run
+    prev = load_reference_averages(now)  # AVANT d'ecrire le journal de ce run
     print(f"[run] {len(rows)} lignes station x carburant apres filtres AFP")
 
     state = load_state()
+    state_before = copy.deepcopy(state)
     new_crossings = compute_threshold_crossings(rows, stats, state)
 
+    forced = os.environ.get("SEND_EMAIL") == "1"
+    do_digest = digest_due(now_paris, state, forced, os.environ.get("AUTO_DIGEST") == "1")
+    if do_digest:
+        print(f"[run] digest du jour du ({'force' if forced else 'rattrapage/heure atteinte'})")
+
     text_report = build_report_text(rows, now_paris, stats, prev)
-    print("\n" + text_report + "\n")
+    print(text_report)
 
     append_log(stats, now)
-    save_state(state)
 
-    if os.environ.get("SEND_EMAIL") == "1":
-        html_report = build_report_html(rows, now_paris, stats, prev, new_crossings)
-        send_email(f"⛽ Prix carburants — {now_paris.strftime('%d/%m %Hh%M')}", text_report, html_report)
+    # --- envois : chaque canal est isole (un echec Slack ne doit pas empecher le
+    # mail, ni provoquer un doublon de mail au run suivant). None = pas tente.
+    ok_email = ok_slack = None
+    if do_digest:
+        try:
+            html_report = build_report_html(rows, now_paris, stats, prev, new_crossings)
+            ok_email = send_email(f"⛽ Prix carburants — {now_paris.strftime('%d/%m %Hh%M')}", text_report, html_report)
+        except Exception as e:
+            print(f"[mail] ECHEC : {e!r}", file=sys.stderr)
+            ok_email = False
     elif new_crossings and os.environ.get("SEND_ALERT_EMAIL") == "1":
-        # Mail dedie, independant du digest : part immediatement des qu'un
-        # nouveau franchissement est detecte (pas de doublon avec le digest
-        # du jour meme grace a la dedup dans alert_state.json).
-        subject, text_alert, html_alert = build_alert_email(new_crossings, now_paris)
-        send_email(subject, text_alert, html_alert)
-    if os.environ.get("SEND_SLACK") == "1":
-        if os.environ.get("SLACK_ONLY_ON_ALERT") != "1" or new_crossings:
+        # Mail dedie, immediat des qu'un seuil est atteint pour la 1re fois.
+        try:
+            subject, text_alert, html_alert = build_alert_email(new_crossings, now_paris)
+            ok_email = send_email(subject, text_alert, html_alert)
+        except Exception as e:
+            print(f"[mail] ECHEC : {e!r}", file=sys.stderr)
+            ok_email = False
+    today = now_paris.date().isoformat()
+    # Digest sur Slack : une seule fois par jour (sauf declenchement manuel), pour
+    # ne pas le reposter a chaque nouvelle tentative si c'est le MAIL qui a echoue.
+    slack_digest = do_digest and (forced or state.get("last_digest_slack_date") != today)
+    if os.environ.get("SEND_SLACK") == "1" and (slack_digest or new_crossings or os.environ.get("SLACK_ONLY_ON_ALERT") != "1"):
+        try:
             blocks = build_slack_blocks(rows, now_paris, stats, prev, new_crossings)
             fallback = f"Prix carburants {now_paris.strftime('%d/%m %Hh%M')} : voir details."
-            send_slack(blocks, fallback)
+            ok_slack = send_slack(blocks, fallback)
+        except Exception as e:
+            print(f"[slack] ECHEC : {e!r}", file=sys.stderr)
+            ok_slack = False
+
+    # --- etat : n'enregistre que ce qui a vraiment ete livre, pour retenter sinon.
+    if do_digest and ok_email:
+        state["last_digest_date"] = today
+    if slack_digest and ok_slack:
+        state["last_digest_slack_date"] = today
+    attempted = [x for x in (ok_email, ok_slack) if x is not None]
+    if new_crossings and attempted and not any(attempted):
+        # alerte non livree (aucun canal n'a marche) -> on la garde "non signalee"
+        state["alerted_threshold"] = state_before.get("alerted_threshold", {})
+        print("[alerte] non livree, sera retentee au prochain run", file=sys.stderr)
+    save_state(state)
 
     if new_crossings:
         print(f"[alerte] {len(new_crossings)} seuil(s) gazole atteint(s) pour la premiere fois")
+    if any(x is False for x in (ok_email, ok_slack)):
+        sys.exit(1)   # run en rouge dans GitHub Actions -> visible, mais l'etat reste sauvegarde
 
 
 if __name__ == "__main__":

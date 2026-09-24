@@ -67,13 +67,18 @@ S'il n'existe pas encore : **api.slack.com/apps → Create New App → From scra
 **Incoming Webhooks** → "Add New Webhook to Workspace" → choisis le canal cible → copie l'URL générée
 (`https://hooks.slack.com/services/...`).
 
-## Rythme actuel du cron (modifiable dans le fichier `.yml`)
+## Rythme actuel (modifiable dans le fichier `.yml`)
 
-- **07h00 et 19h00 (heure de Paris)** : digest complet (mail + Slack) — moyenne/plus cher/moins cher,
-  France + NPDC, gazole et SP95-E10.
-- **Toutes les 2 heures entre 6h et 22h (Paris)** : vérification silencieuse ; un message Slack part
-  **seulement** si une station franchit 2,99 € ou 3,00 € pour la première fois (pas de répétition).
+GitHub Actions ne garantit **pas** l'heure d'exécution des crons : ils sont retardés, voire sautés, quand la
+plateforme est chargée (surtout pile à l'heure ronde). Le script est donc conçu pour ne pas dépendre d'un run précis :
 
-⚠️ Les horaires sont écrits en UTC dans le fichier cron. Paris passe en heure d'hiver (UTC+1) fin octobre
-2026 — les runs se décaleront alors d'une heure (08h/20h au lieu de 07h/19h) tant que le fichier n'est
-pas ajusté.
+- **Un run toutes les heures (minute 17)** + 3 renforts autour de 9h Paris. Chaque run recalcule les prix.
+- **Digest quotidien** : envoyé par le **premier run qui tourne après 9h (heure de Paris)** si le digest du jour n'est pas
+  encore parti. Si le run de 9h saute, il part au run suivant plutôt que jamais (pas de doublon : la date d'envoi est
+  mémorisée dans `alert_state.json`). Insensible au changement d'heure.
+- **Alerte de seuil** : dès qu'une station atteint 2,99 € ou 3,00 € (gazole) pour la première fois en France ou dans le
+  NPDC — puis silence tant que la situation persiste.
+- **Si un envoi échoue** (ex. Gmail refuse la connexion), le run passe en rouge dans l'onglet Actions ET l'envoi est
+  retenté au run suivant (le digest/l'alerte n'est marqué « envoyé » qu'une fois réellement livré).
+
+Consommation : ~27 runs/jour ≈ 800 minutes/mois, sous le quota gratuit (2 000 min/mois) d'un dépôt privé.

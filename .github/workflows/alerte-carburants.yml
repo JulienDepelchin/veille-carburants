@@ -2,11 +2,15 @@ name: Alerte prix carburants
 
 on:
   schedule:
-    # Heures de declenchement en UTC (Paris = UTC+2 l'ete/CEST, UTC+1 l'hiver/CET —
-    # le contenu affiche s'ajuste automatiquement, mais CES horaires de declenchement
-    # se decaleront d'1h par rapport a Paris apres le changement d'heure fin octobre).
-    - cron: '0 7 * * *'    # ~09h00 Paris -> digest complet, une fois par jour (mail + Slack)
-    - cron: '30 */2 * * *' # toutes les 2h, 24h/24 -> verification, alerte immediate si nouveau franchissement
+    # Les crons GitHub sont "best effort" : ils sont retardes ou SAUTES quand la
+    # plateforme est chargee, surtout pile a l'heure ronde. On declenche donc
+    # souvent, a des minutes creuses, et c'est le script qui decide quoi envoyer :
+    #  - le digest de 9h (heure de Paris) part au PREMIER run apres 9h s'il n'est
+    #    pas encore parti aujourd'hui (auto-reparation, insensible aux runs sautes
+    #    et au changement d'heure) ;
+    #  - l'alerte de seuil part au premier run qui voit une station l'atteindre.
+    - cron: '17 * * * *'      # toutes les heures, a la minute 17
+    - cron: '47 6,7,8 * * *'  # renfort autour de 9h Paris (6-8h UTC = ete et hiver)
   workflow_dispatch:           # bouton "Run workflow" pour tester manuellement
     inputs:
       mode:
@@ -17,6 +21,10 @@ on:
 
 permissions:
   contents: write   # necessaire pour committer le journal (historique_prix_carburants.csv)
+
+concurrency:
+  group: alerte-carburants   # un seul run a la fois : evite les conflits de commit
+  cancel-in-progress: false
 
 jobs:
   run:
@@ -38,32 +46,29 @@ jobs:
           MAIL_TO: ${{ secrets.MAIL_TO }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
-          FORCED_MODE="${{ github.event.inputs.mode }}"
-          if [ "$FORCED_MODE" = "verification" ]; then
-            MODE=verification
-          elif [ "$FORCED_MODE" = "digest" ] || [ "${{ github.event.schedule }}" = "0 7 * * *" ]; then
-            MODE=digest
-          else
-            MODE=verification
-          fi
-
-          if [ "$MODE" = "digest" ]; then
-            echo "Mode digest (mail + Slack complet, une fois par jour)"
+          if [ "${{ github.event.inputs.mode }}" = "digest" ]; then
+            echo "Declenchement manuel : digest force (mail + Slack complet)"
             export SEND_EMAIL=1
             export SEND_SLACK=1
           else
-            echo "Mode verification (mail + Slack seulement si nouveau franchissement)"
-            export SEND_EMAIL=0
+            echo "Run automatique : alerte immediate + digest auto-repare apres 9h"
+            export AUTO_DIGEST=1
             export SEND_ALERT_EMAIL=1
             export SEND_SLACK=1
             export SLACK_ONLY_ON_ALERT=1
           fi
           python alerte_carburants.py
 
+      # always() : meme si un envoi a echoue (run en rouge), on conserve le journal
+      # et l'etat, sinon le digest/l'alerte serait re-envoye(e) en double au run suivant.
       - name: Committe le journal et l'etat des alertes
+        if: always()
         run: |
           git config user.name "alerte-carburants-bot"
           git config user.email "actions@users.noreply.github.com"
           git add historique_prix_carburants.csv alert_state.json
           git diff --cached --quiet || git commit -m "Maj prix carburants $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          git push
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && break
+            sleep 3
+          done
