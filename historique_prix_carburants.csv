@@ -115,3 +115,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-09-24T21:00:48.887699+00:00,france,e10,6896,2.1696,2.649,Verrières-en-Anjou (49480),1.989,La Fouillade (12270)
 2026-09-24T21:00:48.887699+00:00,npdc,gazole,438,2.3822,2.732,Étaples (62630),2.225,Lille (59160)
 2026-09-24T21:00:48.887699+00:00,npdc,e10,374,2.1309,2.449,Grande-Synthe (59760),1.99,La Sentinelle (59174)
+2026-09-24T21:30:38.219072+00:00,france,gazole,8566,2.4056,2.9,Paris (75007),2.19,Lannilis (29870)
+2026-09-24T21:30:38.219072+00:00,france,e10,6891,2.1697,2.649,Verrières-en-Anjou (49480),1.989,La Fouillade (12270)
+2026-09-24T21:30:38.219072+00:00,npdc,gazole,438,2.3822,2.732,Étaples (62630),2.225,Lille (59160)
+2026-09-24T21:30:38.219072+00:00,npdc,e10,374,2.1309,2.449,Grande-Synthe (59760),1.99,La Sentinelle (59174)
