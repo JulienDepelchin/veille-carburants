@@ -67,12 +67,45 @@ S'il n'existe pas encore : **api.slack.com/apps → Create New App → From scra
 **Incoming Webhooks** → "Add New Webhook to Workspace" → choisis le canal cible → copie l'URL générée
 (`https://hooks.slack.com/services/...`).
 
+## Déclencheur externe (recommandé : ponctuel et fiable)
+
+Les crons planifiés de GitHub sont « au mieux » (retardés ou sautés). On utilise donc un **service de cron externe**
+(cron-job.org ou équivalent) qui appelle l'API GitHub à heure fixe pour lancer le workflow — démarrage en quelques
+secondes. Les crons GitHub restent en simple filet de sécurité.
+
+**1. Créer un jeton GitHub limité à ce dépôt** : GitHub → *Settings → Developer settings → Personal access tokens →
+Fine-grained tokens → Generate new token* :
+- Nom : `cron-veille-carburants` · Expiration : la plus longue proposée (à renouveler à l'échéance)
+- *Repository access* : **Only select repositories** → `veille-carburants`
+- *Repository permissions* → **Actions : Read and write** (rien d'autre)
+- Copier le jeton (`github_pat_...`), il ne s'affiche qu'une fois. **Ne le colle jamais dans un fichier du dépôt.**
+
+**2. Créer la tâche sur le service de cron** :
+
+| Champ | Valeur |
+|---|---|
+| URL | `https://api.github.com/repos/JulienDepelchin/veille-carburants/actions/workflows/alerte-carburants.yml/dispatches` |
+| Méthode | `POST` |
+| En-têtes | `Accept: application/vnd.github+json` · `Authorization: Bearer <ton jeton>` · `X-GitHub-Api-Version: 2022-11-28` · `Content-Type: application/json` |
+| Corps | `{"ref":"main","inputs":{"mode":"verification"}}` |
+| Fuseau | Europe/Paris |
+| Fréquence | toutes les 30 minutes (`*/30 * * * *`) |
+| Succès attendu | HTTP **204** (aucun contenu) |
+
+Le digest part au premier appel à partir de 9h00 (donc à 9h00 pile si l'appel passe), les alertes au premier appel qui
+voit une station atteindre le seuil. Ne mets **pas** `"mode":"digest"` dans la tâche récurrente : ça forcerait un digest
+à chaque appel.
+
+**3. Tester** : bouton « exécuter maintenant » du service → doit renvoyer 204, et un run apparaît dans l'onglet
+*Actions* du dépôt quelques secondes plus tard.
+
 ## Rythme actuel (modifiable dans le fichier `.yml`)
 
 GitHub Actions ne garantit **pas** l'heure d'exécution des crons : ils sont retardés, voire sautés, quand la
 plateforme est chargée (surtout pile à l'heure ronde). Le script est donc conçu pour ne pas dépendre d'un run précis :
 
-- **Un run toutes les heures (minute 17)** + 3 renforts autour de 9h Paris. Chaque run recalcule les prix.
+- **Un run toutes les 30 min** via le déclencheur externe (+ filet de sécurité : cron GitHub toutes les 4 h et à ~9h47).
+  Chaque run recalcule les prix.
 - **Digest quotidien** : envoyé par le **premier run qui tourne après 9h (heure de Paris)** si le digest du jour n'est pas
   encore parti. Si le run de 9h saute, il part au run suivant plutôt que jamais (pas de doublon : la date d'envoi est
   mémorisée dans `alert_state.json`). Insensible au changement d'heure.
@@ -81,4 +114,5 @@ plateforme est chargée (surtout pile à l'heure ronde). Le script est donc con�
 - **Si un envoi échoue** (ex. Gmail refuse la connexion), le run passe en rouge dans l'onglet Actions ET l'envoi est
   retenté au run suivant (le digest/l'alerte n'est marqué « envoyé » qu'une fois réellement livré).
 
-Consommation : ~27 runs/jour ≈ 800 minutes/mois, sous le quota gratuit (2 000 min/mois) d'un dépôt privé.
+Consommation : ~48 runs/jour externes + ~7 GitHub ≈ 1 650 minutes/mois, sous le quota gratuit de 2 000 min/mois d'un
+dépôt privé (passe à toutes les heures côté service externe si tu dois réduire).

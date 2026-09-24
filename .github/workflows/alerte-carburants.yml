@@ -1,23 +1,25 @@
 name: Alerte prix carburants
 
 on:
-  schedule:
-    # Les crons GitHub sont "best effort" : ils sont retardes ou SAUTES quand la
-    # plateforme est chargee, surtout pile a l'heure ronde. On declenche donc
-    # souvent, a des minutes creuses, et c'est le script qui decide quoi envoyer :
-    #  - le digest de 9h (heure de Paris) part au PREMIER run apres 9h s'il n'est
-    #    pas encore parti aujourd'hui (auto-reparation, insensible aux runs sautes
-    #    et au changement d'heure) ;
-    #  - l'alerte de seuil part au premier run qui voit une station l'atteindre.
-    - cron: '17 * * * *'      # toutes les heures, a la minute 17
-    - cron: '47 6,7,8 * * *'  # renfort autour de 9h Paris (6-8h UTC = ete et hiver)
-  workflow_dispatch:           # bouton "Run workflow" pour tester manuellement
+  # Declencheur PRINCIPAL : un service de cron externe appelle l'API GitHub
+  # (POST .../actions/workflows/alerte-carburants.yml/dispatches, inputs.mode =
+  # "verification") -> demarre en quelques secondes, ponctuel. Voir SETUP.md.
+  workflow_dispatch:
     inputs:
       mode:
-        description: "Mode a forcer pour ce run manuel"
+        description: "verification = run normal (alerte + digest apres 9h) ; digest = force l'envoi du digest"
         type: choice
-        options: [digest, verification]
-        default: digest
+        options: [verification, digest]
+        default: verification   # par defaut NE force PAS le digest (evite les doublons via l'API)
+
+  # Filet de SECURITE : les crons planifies GitHub sont "best effort" (retardes ou
+  # sautes selon la charge), donc peu fiables seuls ; on en garde peu pour rester
+  # sous le quota gratuit de minutes. Le script decide lui-meme quoi envoyer :
+  #  - digest de 9h (Paris) au PREMIER run apres 9h s'il n'est pas encore parti ;
+  #  - alerte de seuil au premier run qui voit une station l'atteindre.
+  schedule:
+    - cron: '17 */4 * * *'    # toutes les 4 h, minute 17
+    - cron: '47 7 * * *'      # ~9h47 Paris (ete) / ~8h47 (hiver)
 
 permissions:
   contents: write   # necessaire pour committer le journal (historique_prix_carburants.csv)
