@@ -91,3 +91,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-09-24T18:01:16.730998+00:00,france,e10,6949,2.1685,2.649,Verrières-en-Anjou (49480),1.98,Avrainville (91630)
 2026-09-24T18:01:16.730998+00:00,npdc,gazole,446,2.3799,2.732,Étaples (62630),2.225,Lille (59160)
 2026-09-24T18:01:16.730998+00:00,npdc,e10,380,2.129,2.449,Grande-Synthe (59760),1.99,Waziers (59119)
+2026-09-24T18:31:09.905860+00:00,france,gazole,8626,2.4047,2.9,Paris (75007),2.19,Lannilis (29870)
+2026-09-24T18:31:09.905860+00:00,france,e10,6959,2.1682,2.649,Verrières-en-Anjou (49480),1.98,Avrainville (91630)
+2026-09-24T18:31:09.905860+00:00,npdc,gazole,446,2.3799,2.732,Étaples (62630),2.225,Lille (59160)
+2026-09-24T18:31:09.905860+00:00,npdc,e10,380,2.129,2.449,Grande-Synthe (59760),1.99,Waziers (59119)
