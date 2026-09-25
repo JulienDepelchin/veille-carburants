@@ -207,3 +207,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-09-25T08:01:14.955941+00:00,france,e10,7031,2.1665,2.649,Verrières-en-Anjou (49480),1.989,La Fouillade (12270)
 2026-09-25T08:01:14.955941+00:00,npdc,gazole,453,2.3774,2.732,Étaples (62630),2.225,Lille (59160)
 2026-09-25T08:01:14.955941+00:00,npdc,e10,386,2.1262,2.449,Grande-Synthe (59760),1.99,Waziers (59119)
+2026-09-25T08:30:36.207334+00:00,france,gazole,8711,2.4017,2.9,Paris (75007),1.379,Clermont-Ferrand (63100)
+2026-09-25T08:30:36.207334+00:00,france,e10,7044,2.1665,2.649,Verrières-en-Anjou (49480),1.98,Limogne-en-Quercy (46260)
+2026-09-25T08:30:36.207334+00:00,npdc,gazole,453,2.3772,2.732,Étaples (62630),2.225,Lille (59160)
+2026-09-25T08:30:36.207334+00:00,npdc,e10,385,2.1273,2.449,Grande-Synthe (59760),1.99,Waziers (59119)
