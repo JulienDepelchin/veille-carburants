@@ -283,3 +283,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-09-25T16:31:06.595688+00:00,france,e10,7011,2.1685,2.718,Mionnay (01390),1.98,Limogne-en-Quercy (46260)
 2026-09-25T16:31:06.595688+00:00,npdc,gazole,445,2.3784,2.84,Étaples (62630),2.225,Lille (59160)
 2026-09-25T16:31:06.595688+00:00,npdc,e10,376,2.132,2.449,Grande-Synthe (59760),1.99,Waziers (59119)
+2026-09-25T17:01:00.080668+00:00,france,gazole,8675,2.4009,2.934,Ostwald (67540),1.25,Chambray-lès-Tours (37170)
+2026-09-25T17:01:00.080668+00:00,france,e10,6981,2.1693,2.718,Mionnay (01390),1.98,Limogne-en-Quercy (46260)
+2026-09-25T17:01:00.080668+00:00,npdc,gazole,443,2.3789,2.84,Étaples (62630),2.225,Lille (59160)
+2026-09-25T17:01:00.080668+00:00,npdc,e10,371,2.1337,2.449,Grande-Synthe (59760),1.99,Waziers (59119)
