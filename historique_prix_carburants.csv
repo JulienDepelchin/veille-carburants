@@ -699,3 +699,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-09-27T15:30:54.023339+00:00,france,e10,6669,2.1781,2.675,Mionnay (01390),1.989,La Fouillade (12270)
 2026-09-27T15:30:54.023339+00:00,npdc,gazole,429,2.3824,2.784,Étaples (62630),2.225,Lille (59160)
 2026-09-27T15:30:54.023339+00:00,npdc,e10,352,2.1434,2.449,Grande-Synthe (59760),1.99,La Sentinelle (59174)
+2026-09-27T16:00:59.407637+00:00,france,gazole,8367,2.4053,2.9,Paris (75007),2.19,Lannilis (29870)
+2026-09-27T16:00:59.407637+00:00,france,e10,6653,2.1785,2.675,Mionnay (01390),1.989,La Fouillade (12270)
+2026-09-27T16:00:59.407637+00:00,npdc,gazole,428,2.3827,2.784,Étaples (62630),2.225,Lille (59160)
+2026-09-27T16:00:59.407637+00:00,npdc,e10,352,2.1434,2.449,Grande-Synthe (59760),1.99,La Sentinelle (59174)
