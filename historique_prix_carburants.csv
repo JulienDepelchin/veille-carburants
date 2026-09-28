@@ -827,3 +827,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-09-28T06:01:13.028391+00:00,france,e10,6619,2.1798,2.675,Mionnay (01390),1.989,La Fouillade (12270)
 2026-09-28T06:01:13.028391+00:00,npdc,gazole,427,2.3827,2.784,Étaples (62630),2.225,Lille (59160)
 2026-09-28T06:01:13.028391+00:00,npdc,e10,350,2.1439,2.449,Grande-Synthe (59760),1.99,Waziers (59119)
+2026-09-28T06:30:56.146706+00:00,france,gazole,8347,2.4057,2.9,Paris (75007),2.19,Lannilis (29870)
+2026-09-28T06:30:56.146706+00:00,france,e10,6627,2.1798,2.675,Mionnay (01390),1.989,La Fouillade (12270)
+2026-09-28T06:30:56.146706+00:00,npdc,gazole,426,2.3831,2.784,Étaples (62630),2.225,Lille (59160)
+2026-09-28T06:30:56.146706+00:00,npdc,e10,351,2.1438,2.449,Grande-Synthe (59760),1.99,Waziers (59119)
