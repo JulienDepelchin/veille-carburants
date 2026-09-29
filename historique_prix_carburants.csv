@@ -1055,3 +1055,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-09-29T09:00:57.447360+00:00,france,e10,6954,2.1755,2.669,Verrières-en-Anjou (49480),1.259,Le Pontet (84130)
 2026-09-29T09:00:57.447360+00:00,npdc,gazole,441,2.379,2.704,Étaples (62630),2.203,Caudry (59540)
 2026-09-29T09:00:57.447360+00:00,npdc,e10,371,2.141,2.449,Grande-Synthe (59760),1.99,La Sentinelle (59174)
+2026-09-29T09:31:02.083231+00:00,france,gazole,8614,2.3986,2.9,Paris (75007),2.19,Lannilis (29870)
+2026-09-29T09:31:02.083231+00:00,france,e10,6947,2.1756,2.669,Verrières-en-Anjou (49480),1.259,Le Pontet (84130)
+2026-09-29T09:31:02.083231+00:00,npdc,gazole,440,2.3794,2.704,Étaples (62630),2.203,Caudry (59540)
+2026-09-29T09:31:02.083231+00:00,npdc,e10,371,2.141,2.449,Grande-Synthe (59760),1.99,La Sentinelle (59174)
