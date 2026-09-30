@@ -1271,3 +1271,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-09-30T09:30:58.674792+00:00,france,e10,7096,2.1699,2.649,Verrières-en-Anjou (49480),1.98,Limogne-en-Quercy (46260)
 2026-09-30T09:30:58.674792+00:00,npdc,gazole,450,2.3737,2.669,Grande-Synthe (59760),2.225,Wormhout (59470)
 2026-09-30T09:30:58.674792+00:00,npdc,e10,386,2.1328,2.439,Havrincourt (62147),1.99,Waziers (59119)
+2026-09-30T10:01:07.017118+00:00,france,gazole,8757,2.3916,2.9,Paris (75007),2.135,Marignane (13700)
+2026-09-30T10:01:07.017118+00:00,france,e10,7094,2.1698,2.649,Verrières-en-Anjou (49480),1.98,Limogne-en-Quercy (46260)
+2026-09-30T10:01:07.017118+00:00,npdc,gazole,448,2.3739,2.669,Grande-Synthe (59760),2.225,Wormhout (59470)
+2026-09-30T10:01:07.017118+00:00,npdc,e10,384,2.1333,2.439,Havrincourt (62147),1.99,Waziers (59119)
