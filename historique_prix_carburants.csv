@@ -1559,3 +1559,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-10-01T18:30:36.731478+00:00,france,e10,7098,2.1658,2.649,Verrières-en-Anjou (49480),1.98,Limogne-en-Quercy (46260)
 2026-10-01T18:30:36.731478+00:00,npdc,gazole,444,2.3687,2.709,Étaples (62630),2.203,Caudry (59540)
 2026-10-01T18:30:36.731478+00:00,npdc,e10,380,2.1314,2.439,Havrincourt (62147),1.99,Waziers (59119)
+2026-10-01T19:00:45.141545+00:00,france,gazole,8669,2.3862,2.9,Paris (75007),2.19,Lannilis (29870)
+2026-10-01T19:00:45.141545+00:00,france,e10,7037,2.1671,2.649,Verrières-en-Anjou (49480),1.98,Limogne-en-Quercy (46260)
+2026-10-01T19:00:45.141545+00:00,npdc,gazole,441,2.3693,2.709,Étaples (62630),2.203,Caudry (59540)
+2026-10-01T19:00:45.141545+00:00,npdc,e10,372,2.1342,2.439,Havrincourt (62147),1.99,Waziers (59119)
