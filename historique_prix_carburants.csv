@@ -1891,3 +1891,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-10-03T09:00:44.631610+00:00,france,e10,7101,2.1636,2.651,Mionnay (01390),1.98,Limogne-en-Quercy (46260)
 2026-10-03T09:00:44.631610+00:00,npdc,gazole,445,2.3648,2.693,Étaples (62630),2.249,Haspres (59198)
 2026-10-03T09:00:44.631610+00:00,npdc,e10,379,2.1293,2.439,Havrincourt (62147),1.99,Waziers (59119)
+2026-10-03T09:30:43.819698+00:00,france,gazole,8743,2.3804,2.9,Paris (75007),2.0,Cahors (46000)
+2026-10-03T09:30:43.819698+00:00,france,e10,7102,2.1635,2.651,Mionnay (01390),1.98,Limogne-en-Quercy (46260)
+2026-10-03T09:30:43.819698+00:00,npdc,gazole,445,2.3648,2.693,Étaples (62630),2.249,Haspres (59198)
+2026-10-03T09:30:43.819698+00:00,npdc,e10,380,2.1287,2.439,Havrincourt (62147),1.99,Waziers (59119)
