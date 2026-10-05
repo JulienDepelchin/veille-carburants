@@ -2359,3 +2359,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-10-05T14:30:57.086324+00:00,france,e10,6757,2.1716,2.649,Verrières-en-Anjou (49480),1.989,Bourran (47320)
 2026-10-05T14:30:57.086324+00:00,npdc,gazole,436,2.3647,2.659,Étaples (62630),2.249,Haspres (59198)
 2026-10-05T14:30:57.086324+00:00,npdc,e10,371,2.1326,2.439,Havrincourt (62147),1.99,Waziers (59119)
+2026-10-05T15:01:09.044788+00:00,france,gazole,8441,2.3811,2.9,Paris (75007),1.25,Maringues (63350)
+2026-10-05T15:01:09.044788+00:00,france,e10,6776,2.1712,2.719,Le Grand-Lucé (72150),1.989,Bourran (47320)
+2026-10-05T15:01:09.044788+00:00,npdc,gazole,440,2.3632,2.659,Étaples (62630),2.249,Haspres (59198)
+2026-10-05T15:01:09.044788+00:00,npdc,e10,372,2.132,2.439,Havrincourt (62147),1.99,Waziers (59119)
