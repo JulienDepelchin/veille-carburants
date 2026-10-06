@@ -2443,3 +2443,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-10-06T00:01:00.772529+00:00,france,e10,6883,2.1682,2.719,Le Grand-Lucé (72150),1.989,Bourran (47320)
 2026-10-06T00:01:00.772529+00:00,npdc,gazole,443,2.3621,2.659,Étaples (62630),2.249,Haspres (59198)
 2026-10-06T00:01:00.772529+00:00,npdc,e10,367,2.1332,2.439,Havrincourt (62147),1.99,La Sentinelle (59174)
+2026-10-06T00:31:01.096097+00:00,france,gazole,8397,2.3813,2.9,Paris (75007),2.19,Lannilis (29870)
+2026-10-06T00:31:01.096097+00:00,france,e10,6742,2.172,2.719,Le Grand-Lucé (72150),1.989,Bourran (47320)
+2026-10-06T00:31:01.096097+00:00,npdc,gazole,435,2.3642,2.659,Étaples (62630),2.249,Haspres (59198)
+2026-10-06T00:31:01.096097+00:00,npdc,e10,360,2.136,2.439,Havrincourt (62147),1.99,La Sentinelle (59174)
