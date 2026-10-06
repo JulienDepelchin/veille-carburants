@@ -2639,3 +2639,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-10-06T22:30:56.030426+00:00,france,e10,6959,2.1654,2.719,Le Grand-Lucé (72150),1.98,Limogne-en-Quercy (46260)
 2026-10-06T22:30:56.030426+00:00,npdc,gazole,442,2.3556,2.659,Étaples (62630),2.225,Roubaix (59100)
 2026-10-06T22:30:56.030426+00:00,npdc,e10,375,2.1303,2.439,Havrincourt (62147),1.99,La Sentinelle (59174)
+2026-10-06T23:01:09.021266+00:00,france,gazole,8656,2.3706,2.9,Paris (75007),2.19,Lannilis (29870)
+2026-10-06T23:01:09.021266+00:00,france,e10,7068,2.1627,2.719,Le Grand-Lucé (72150),1.98,Limogne-en-Quercy (46260)
+2026-10-06T23:01:09.021266+00:00,npdc,gazole,451,2.3536,2.659,Étaples (62630),2.239,La Gorgue (59253)
+2026-10-06T23:01:09.021266+00:00,npdc,e10,386,2.1262,2.439,Havrincourt (62147),1.99,La Sentinelle (59174)
