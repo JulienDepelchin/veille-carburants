@@ -3203,3 +3203,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-10-09T15:19:31.269418+00:00,france,e10,7174,2.1607,2.669,Mionnay (01390),1.749,Mirepoix (09500)
 2026-10-09T15:19:31.269418+00:00,npdc,gazole,450,2.3377,2.81,Étaples (62630),2.203,Caudry (59540)
 2026-10-09T15:19:31.269418+00:00,npdc,e10,384,2.1275,2.439,Havrincourt (62147),1.99,Waziers (59119)
+2026-10-09T15:30:58.291489+00:00,france,gazole,8838,2.3536,2.934,Ostwald (67540),2.135,Saint-Yrieix-sur-Charente (16710)
+2026-10-09T15:30:58.291489+00:00,france,e10,7199,2.1602,2.669,Mionnay (01390),1.749,Mirepoix (09500)
+2026-10-09T15:30:58.291489+00:00,npdc,gazole,450,2.3376,2.81,Étaples (62630),2.203,Caudry (59540)
+2026-10-09T15:30:58.291489+00:00,npdc,e10,384,2.1277,2.439,Havrincourt (62147),1.99,Waziers (59119)
