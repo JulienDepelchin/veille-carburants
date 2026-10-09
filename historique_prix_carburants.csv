@@ -3159,3 +3159,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-10-09T10:30:55.908530+00:00,france,e10,7194,2.1595,2.669,Mionnay (01390),1.749,Mirepoix (09500)
 2026-10-09T10:30:55.908530+00:00,npdc,gazole,451,2.3379,2.81,Étaples (62630),2.229,La Gorgue (59253)
 2026-10-09T10:30:55.908530+00:00,npdc,e10,387,2.1252,2.439,Havrincourt (62147),1.99,Waziers (59119)
+2026-10-09T11:00:50.263349+00:00,france,gazole,8829,2.3539,2.934,Ostwald (67540),2.176,Salon-de-Provence (13300)
+2026-10-09T11:00:50.263349+00:00,france,e10,7189,2.1601,2.669,Mionnay (01390),1.749,Mirepoix (09500)
+2026-10-09T11:00:50.263349+00:00,npdc,gazole,451,2.3377,2.81,Étaples (62630),2.239,Marles-les-Mines (62540)
+2026-10-09T11:00:50.263349+00:00,npdc,e10,386,2.1259,2.439,Havrincourt (62147),1.99,Waziers (59119)
