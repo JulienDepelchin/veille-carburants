@@ -3323,3 +3323,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-10-10T05:30:56.160107+00:00,france,e10,7156,2.1612,2.669,Mionnay (01390),1.749,Mirepoix (09500)
 2026-10-10T05:30:56.160107+00:00,npdc,gazole,448,2.3378,2.81,Étaples (62630),2.203,Caudry (59540)
 2026-10-10T05:30:56.160107+00:00,npdc,e10,383,2.1287,2.439,Havrincourt (62147),1.99,La Sentinelle (59174)
+2026-10-10T05:56:14.708102+00:00,france,gazole,8789,2.3542,2.934,Ostwald (67540),2.176,Salon-de-Provence (13300)
+2026-10-10T05:56:14.708102+00:00,france,e10,7162,2.1612,2.669,Mionnay (01390),1.749,Mirepoix (09500)
+2026-10-10T05:56:14.708102+00:00,npdc,gazole,451,2.3372,2.81,Étaples (62630),2.203,Caudry (59540)
+2026-10-10T05:56:14.708102+00:00,npdc,e10,386,2.1277,2.439,Havrincourt (62147),1.99,Waziers (59119)
