@@ -3755,3 +3755,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-10-12T06:30:54.270436+00:00,france,e10,6769,2.1722,2.689,Verrières-en-Anjou (49480),1.989,Bourran (47320)
 2026-10-12T06:30:54.270436+00:00,npdc,gazole,436,2.3422,2.792,Étaples (62630),2.203,Caudry (59540)
 2026-10-12T06:30:54.270436+00:00,npdc,e10,359,2.1404,2.439,Havrincourt (62147),1.99,Waziers (59119)
+2026-10-12T07:01:00.092028+00:00,france,gazole,8508,2.3591,2.916,Ostwald (67540),2.19,Lannilis (29870)
+2026-10-12T07:01:00.092028+00:00,france,e10,6778,2.1723,2.689,Verrières-en-Anjou (49480),1.989,Bourran (47320)
+2026-10-12T07:01:00.092028+00:00,npdc,gazole,438,2.3424,2.792,Étaples (62630),2.203,Caudry (59540)
+2026-10-12T07:01:00.092028+00:00,npdc,e10,359,2.1405,2.439,Havrincourt (62147),1.99,Waziers (59119)
