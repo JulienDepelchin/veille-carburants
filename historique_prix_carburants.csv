@@ -4907,3 +4907,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-10-17T18:00:54.847801+00:00,france,e10,6881,2.1721,2.659,Verrières-en-Anjou (49480),1.98,Limogne-en-Quercy (46260)
 2026-10-17T18:00:54.847801+00:00,npdc,gazole,424,2.3612,2.765,Étaples (62630),2.194,Sequedin (59320)
 2026-10-17T18:00:54.847801+00:00,npdc,e10,360,2.1516,2.439,Havrincourt (62147),1.99,Waziers (59119)
+2026-10-17T18:30:56.006329+00:00,france,gazole,8565,2.3714,2.876,Ostwald (67540),1.381,Bâgé-Dommartin (01380)
+2026-10-17T18:30:56.006329+00:00,france,e10,6923,2.171,2.659,Verrières-en-Anjou (49480),1.98,Limogne-en-Quercy (46260)
+2026-10-17T18:30:56.006329+00:00,npdc,gazole,426,2.3607,2.765,Étaples (62630),2.194,Sequedin (59320)
+2026-10-17T18:30:56.006329+00:00,npdc,e10,364,2.1498,2.439,Havrincourt (62147),1.99,Waziers (59119)
