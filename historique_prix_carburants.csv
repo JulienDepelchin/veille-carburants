@@ -6735,3 +6735,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-10-26T10:30:25.008587+00:00,france,e10,6542,2.1402,2.639,Verrières-en-Anjou (49480),1.971,Baud (56150)
 2026-10-26T10:30:25.008587+00:00,npdc,gazole,407,2.3705,2.837,Étaples (62630),2.203,Caudry (59540)
 2026-10-26T10:30:25.008587+00:00,npdc,e10,350,2.1192,2.439,Havrincourt (62147),1.989,Haspres (59198)
+2026-10-26T11:00:25.027365+00:00,france,gazole,8132,2.383,2.928,Ostwald (67540),2.192,Vallauris (06220)
+2026-10-26T11:00:25.027365+00:00,france,e10,6572,2.1385,2.639,Verrières-en-Anjou (49480),1.971,Baud (56150)
+2026-10-26T11:00:25.027365+00:00,npdc,gazole,411,2.3698,2.837,Étaples (62630),2.203,Caudry (59540)
+2026-10-26T11:00:25.027365+00:00,npdc,e10,356,2.1163,2.439,Havrincourt (62147),1.989,Haspres (59198)
