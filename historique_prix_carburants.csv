@@ -6931,3 +6931,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-10-27T09:00:23.513500+00:00,france,e10,6849,2.1296,2.639,Verrières-en-Anjou (49480),1.975,Haguenau (67500)
 2026-10-27T09:00:23.513500+00:00,npdc,gazole,440,2.3649,2.767,Étaples (62630),2.203,Caudry (59540)
 2026-10-27T09:00:23.513500+00:00,npdc,e10,385,2.1038,2.389,Grande-Synthe (59760),1.989,Haspres (59198)
+2026-10-27T09:30:20.907966+00:00,france,gazole,8348,2.3817,2.896,Sausheim (68390),1.99,Objat (19130)
+2026-10-27T09:30:20.907966+00:00,france,e10,6861,2.1289,2.639,Verrières-en-Anjou (49480),1.975,Haguenau (67500)
+2026-10-27T09:30:20.907966+00:00,npdc,gazole,440,2.3653,2.792,Étaples (62630),2.203,Caudry (59540)
+2026-10-27T09:30:20.907966+00:00,npdc,e10,386,2.1043,2.389,Grande-Synthe (59760),1.989,Haspres (59198)
