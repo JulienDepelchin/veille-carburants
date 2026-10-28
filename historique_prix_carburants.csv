@@ -7147,3 +7147,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-10-28T10:00:23.568444+00:00,france,e10,6915,2.1243,2.639,Verrières-en-Anjou (49480),1.98,Terrasson-Lavilledieu (24120)
 2026-10-28T10:00:23.568444+00:00,npdc,gazole,438,2.3732,2.747,Étaples (62630),2.249,Haspres (59198)
 2026-10-28T10:00:23.568444+00:00,npdc,e10,381,2.0998,2.389,Grande-Synthe (59760),1.989,Haspres (59198)
+2026-10-28T10:30:23.898151+00:00,france,gazole,8422,2.3875,2.876,Ostwald (67540),1.999,Six-Fours-les-Plages (83140)
+2026-10-28T10:30:23.898151+00:00,france,e10,6897,2.1243,2.639,Verrières-en-Anjou (49480),1.98,Terrasson-Lavilledieu (24120)
+2026-10-28T10:30:23.898151+00:00,npdc,gazole,438,2.3739,2.747,Étaples (62630),2.249,Haspres (59198)
+2026-10-28T10:30:23.898151+00:00,npdc,e10,381,2.0996,2.389,Grande-Synthe (59760),1.989,Haspres (59198)
