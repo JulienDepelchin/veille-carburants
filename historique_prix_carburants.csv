@@ -7831,3 +7831,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-10-31T16:30:16.903521+00:00,france,e10,6841,2.1137,2.629,Verrières-en-Anjou (49480),1.95,Amboise (37400)
 2026-10-31T16:30:16.903521+00:00,npdc,gazole,441,2.3687,2.819,Étaples (62630),2.149,Auchel (62260)
 2026-10-31T16:30:16.903521+00:00,npdc,e10,385,2.0842,2.349,Grande-Synthe (59760),1.989,Haspres (59198)
+2026-10-31T17:00:17.467142+00:00,france,gazole,8297,2.3859,2.901,Ostwald (67540),2.139,Paris (75017)
+2026-10-31T17:00:17.467142+00:00,france,e10,6810,2.1141,2.629,Verrières-en-Anjou (49480),1.976,Salon-de-Provence (13300)
+2026-10-31T17:00:17.467142+00:00,npdc,gazole,439,2.3691,2.819,Étaples (62630),2.149,Auchel (62260)
+2026-10-31T17:00:17.467142+00:00,npdc,e10,384,2.0843,2.349,Grande-Synthe (59760),1.989,Haspres (59198)
