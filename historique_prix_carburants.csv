@@ -8003,3 +8003,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-01T13:00:12.289240+00:00,france,e10,6604,2.1183,2.629,Verrières-en-Anjou (49480),1.909,Pont-Remy (80580)
 2026-11-01T13:00:12.289240+00:00,npdc,gazole,422,2.348,2.675,Étaples (62630),2.126,Vermelles (62980)
 2026-11-01T13:00:12.289240+00:00,npdc,e10,361,2.0898,2.349,Grande-Synthe (59760),1.989,Haspres (59198)
+2026-11-01T13:30:13.140000+00:00,france,gazole,8095,2.3557,2.876,Ostwald (67540),2.08,Graulhet (81300)
+2026-11-01T13:30:13.140000+00:00,france,e10,6592,2.1185,2.629,Verrières-en-Anjou (49480),1.909,Pont-Remy (80580)
+2026-11-01T13:30:13.140000+00:00,npdc,gazole,421,2.3483,2.675,Étaples (62630),2.126,Vermelles (62980)
+2026-11-01T13:30:13.140000+00:00,npdc,e10,359,2.0903,2.349,Grande-Synthe (59760),1.989,Haspres (59198)
