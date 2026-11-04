@@ -8595,3 +8595,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-04T09:30:55.455872+00:00,france,e10,6819,2.0881,2.629,Verrières-en-Anjou (49480),1.915,Angoulins (17690)
 2026-11-04T09:30:55.455872+00:00,npdc,gazole,426,2.247,2.545,Étaples (62630),1.945,Hautmont (59330)
 2026-11-04T09:30:55.455872+00:00,npdc,e10,364,2.0593,2.349,Grande-Synthe (59760),1.919,Auchy-les-Mines (62138)
+2026-11-04T10:30:57.844616+00:00,france,gazole,8388,2.251,2.876,Ostwald (67540),1.945,Hautmont (59330)
+2026-11-04T10:30:57.844616+00:00,france,e10,6824,2.0867,2.967,Villepinte (93420),1.876,Pontault-Combault (77340)
+2026-11-04T10:30:57.844616+00:00,npdc,gazole,423,2.2451,2.545,Étaples (62630),1.945,Hautmont (59330)
+2026-11-04T10:30:57.844616+00:00,npdc,e10,363,2.0582,2.349,Grande-Synthe (59760),1.919,Auchy-les-Mines (62138)
