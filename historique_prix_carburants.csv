@@ -8511,3 +8511,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-03T23:31:18.911489+00:00,france,e10,6698,2.0957,2.629,Verrières-en-Anjou (49480),1.919,Saint-Herblain (44800)
 2026-11-03T23:31:18.911489+00:00,npdc,gazole,416,2.2564,2.534,Étaples (62630),2.08,Fourmies (59610)
 2026-11-03T23:31:18.911489+00:00,npdc,e10,357,2.0655,2.349,Grande-Synthe (59760),1.919,Auchy-les-Mines (62138)
+2026-11-04T00:00:56.023719+00:00,france,gazole,8236,2.26,2.876,Ostwald (67540),2.046,Mulhouse (68200)
+2026-11-04T00:00:56.023719+00:00,france,e10,6698,2.0957,2.629,Verrières-en-Anjou (49480),1.919,Saint-Herblain (44800)
+2026-11-04T00:00:56.023719+00:00,npdc,gazole,416,2.2564,2.534,Étaples (62630),2.08,Fourmies (59610)
+2026-11-04T00:00:56.023719+00:00,npdc,e10,357,2.0655,2.349,Grande-Synthe (59760),1.919,Auchy-les-Mines (62138)
