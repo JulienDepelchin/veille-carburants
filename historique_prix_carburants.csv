@@ -8867,3 +8867,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-05T17:31:02.293162+00:00,france,e10,6880,2.0725,2.99,Villepinte (93420),1.895,Pontault-Combault (77340)
 2026-11-05T17:31:02.293162+00:00,npdc,gazole,413,2.2274,2.49,Rumaucourt (62860),2.068,Fourmies (59610)
 2026-11-05T17:31:02.293162+00:00,npdc,e10,350,2.0478,2.339,Havrincourt (62147),1.93,Mons-en-Barœul (59370)
+2026-11-05T18:00:59.394123+00:00,france,gazole,8527,2.2351,2.876,Ostwald (67540),2.04,Bury (60250)
+2026-11-05T18:00:59.394123+00:00,france,e10,6880,2.0723,2.99,Villepinte (93420),1.895,Pontault-Combault (77340)
+2026-11-05T18:00:59.394123+00:00,npdc,gazole,414,2.2263,2.49,Rumaucourt (62860),2.068,Fourmies (59610)
+2026-11-05T18:00:59.394123+00:00,npdc,e10,351,2.0468,2.339,Havrincourt (62147),1.93,Mons-en-Barœul (59370)
