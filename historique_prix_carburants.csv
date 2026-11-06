@@ -8927,3 +8927,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-06T00:30:57.900702+00:00,france,e10,6816,2.0721,2.99,Villepinte (93420),1.699,Séné (56860)
 2026-11-06T00:30:57.900702+00:00,npdc,gazole,408,2.2266,2.49,Rumaucourt (62860),2.058,Auchy-les-Mines (62138)
 2026-11-06T00:30:57.900702+00:00,npdc,e10,346,2.0469,2.339,Havrincourt (62147),1.93,Mons-en-Barœul (59370)
+2026-11-06T01:00:58.210288+00:00,france,gazole,8533,2.2337,2.876,Ostwald (67540),2.04,Bury (60250)
+2026-11-06T01:00:58.210288+00:00,france,e10,6906,2.0708,2.99,Villepinte (93420),1.699,Séné (56860)
+2026-11-06T01:00:58.210288+00:00,npdc,gazole,417,2.2249,2.49,Rumaucourt (62860),2.058,Auchy-les-Mines (62138)
+2026-11-06T01:00:58.210288+00:00,npdc,e10,353,2.0455,2.339,Havrincourt (62147),1.93,Mons-en-Barœul (59370)
