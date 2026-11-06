@@ -9003,3 +9003,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-06T09:30:58.792572+00:00,france,e10,6973,2.0618,2.99,Villepinte (93420),1.877,Haguenau (67500)
 2026-11-06T09:30:58.792572+00:00,npdc,gazole,424,2.2133,2.537,Étaples (62630),2.052,Douchy-les-Mines (59282)
 2026-11-06T09:30:58.792572+00:00,npdc,e10,361,2.0362,2.339,Havrincourt (62147),1.929,La Madeleine (59110)
+2026-11-06T10:00:58.443665+00:00,france,gazole,8626,2.223,2.876,Ostwald (67540),2.025,Fos-sur-Mer (13270)
+2026-11-06T10:00:58.443665+00:00,france,e10,6974,2.061,2.99,Villepinte (93420),1.877,Haguenau (67500)
+2026-11-06T10:00:58.443665+00:00,npdc,gazole,424,2.2117,2.537,Étaples (62630),2.052,Douchy-les-Mines (59282)
+2026-11-06T10:00:58.443665+00:00,npdc,e10,361,2.0345,2.339,Havrincourt (62147),1.929,La Madeleine (59110)
