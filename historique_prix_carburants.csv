@@ -9331,3 +9331,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-07T23:00:57.121448+00:00,france,e10,6802,2.0486,2.99,Villepinte (93420),1.874,Les Sables-d'Olonne (85340)
 2026-11-07T23:00:57.121448+00:00,npdc,gazole,422,2.1907,2.533,Étaples (62630),2.031,Cucq (62780)
 2026-11-07T23:00:57.121448+00:00,npdc,e10,351,2.0195,2.339,Havrincourt (62147),1.899,La Gorgue (59253)
+2026-11-07T23:30:58.122596+00:00,france,gazole,8471,2.2072,2.701,Roussillon (38150),2.008,Niort (79000)
+2026-11-07T23:30:58.122596+00:00,france,e10,6801,2.0486,2.99,Villepinte (93420),1.874,Les Sables-d'Olonne (85340)
+2026-11-07T23:30:58.122596+00:00,npdc,gazole,422,2.1907,2.533,Étaples (62630),2.031,Cucq (62780)
+2026-11-07T23:30:58.122596+00:00,npdc,e10,351,2.0195,2.339,Havrincourt (62147),1.899,La Gorgue (59253)
