@@ -4,8 +4,8 @@
   "gazole_3.00": []
  },
  "alerted_threshold": {
-  "france_2.99": false
+  "france_2.99": true
  },
- "last_digest_date": "2026-11-08",
- "last_digest_slack_date": "2026-11-08"
+ "last_digest_date": "2026-11-09",
+ "last_digest_slack_date": "2026-11-09"
 }
