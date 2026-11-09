@@ -9707,3 +9707,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-09T18:31:19.799452+00:00,france,e10,6751,2.0389,2.99,Villepinte (93420),1.845,Vesoul (70000)
 2026-11-09T18:31:19.799452+00:00,npdc,gazole,409,2.1786,2.49,Rumaucourt (62860),2.031,Cucq (62780)
 2026-11-09T18:31:19.799452+00:00,npdc,e10,351,2.0115,2.339,Havrincourt (62147),1.899,La Gorgue (59253)
+2026-11-09T18:50:07.404760+00:00,france,gazole,8393,2.1977,2.99,Ardentes (36120),1.989,Bury (60250)
+2026-11-09T18:50:07.404760+00:00,france,e10,6754,2.039,2.99,Villepinte (93420),1.845,Vesoul (70000)
+2026-11-09T18:50:07.404760+00:00,npdc,gazole,411,2.1781,2.49,Rumaucourt (62860),2.031,Cucq (62780)
+2026-11-09T18:50:07.404760+00:00,npdc,e10,352,2.0114,2.339,Havrincourt (62147),1.899,La Gorgue (59253)
