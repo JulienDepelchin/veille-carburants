@@ -9639,3 +9639,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-09T10:30:52.344948+00:00,france,e10,6625,2.0438,2.99,Villepinte (93420),1.845,Vesoul (70000)
 2026-11-09T10:30:52.344948+00:00,npdc,gazole,402,2.1834,2.533,Étaples (62630),2.031,Cucq (62780)
 2026-11-09T10:30:52.344948+00:00,npdc,e10,340,2.0153,2.339,Havrincourt (62147),1.899,La Gorgue (59253)
+2026-11-09T11:00:50.876776+00:00,france,gazole,8301,2.2032,2.99,Ardentes (36120),2.015,Fos-sur-Mer (13270)
+2026-11-09T11:00:50.876776+00:00,france,e10,6611,2.0445,2.99,Villepinte (93420),1.895,Fos-sur-Mer (13270)
+2026-11-09T11:00:50.876776+00:00,npdc,gazole,402,2.1849,2.533,Étaples (62630),2.031,Cucq (62780)
+2026-11-09T11:00:50.876776+00:00,npdc,e10,341,2.0165,2.339,Havrincourt (62147),1.899,La Gorgue (59253)
