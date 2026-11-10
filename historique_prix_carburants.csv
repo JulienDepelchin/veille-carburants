@@ -9839,3 +9839,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-10T10:00:33.161541+00:00,france,e10,6950,2.03,2.99,Villepinte (93420),1.845,Vesoul (70000)
 2026-11-10T10:00:33.161541+00:00,npdc,gazole,421,2.1681,2.484,Étaples (62630),2.035,Bourbourg (59630)
 2026-11-10T10:00:33.161541+00:00,npdc,e10,367,2.002,2.299,Douai (59500),1.903,La Sentinelle (59174)
+2026-11-10T10:30:31.968336+00:00,france,gazole,8566,2.1895,2.653,Levens (06670),1.989,Bury (60250)
+2026-11-10T10:30:31.968336+00:00,france,e10,6955,2.0294,2.99,Villepinte (93420),1.845,Vesoul (70000)
+2026-11-10T10:30:31.968336+00:00,npdc,gazole,423,2.1678,2.484,Étaples (62630),2.035,Bourbourg (59630)
+2026-11-10T10:30:31.968336+00:00,npdc,e10,370,2.0016,2.299,Douai (59500),1.903,La Sentinelle (59174)
