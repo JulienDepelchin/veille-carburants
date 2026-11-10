@@ -9859,3 +9859,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-10T12:30:33.607450+00:00,france,e10,6973,2.0279,2.549,Verrières-en-Anjou (49480),1.894,Bouxwiller (67330)
 2026-11-10T12:30:33.607450+00:00,npdc,gazole,429,2.1657,2.484,Étaples (62630),2.035,Bourbourg (59630)
 2026-11-10T12:30:33.607450+00:00,npdc,e10,374,1.9993,2.299,Douai (59500),1.903,La Sentinelle (59174)
+2026-11-10T12:41:22.677372+00:00,france,gazole,8586,2.1876,2.653,Levens (06670),1.929,Illiers-Combray (28120)
+2026-11-10T12:41:22.677372+00:00,france,e10,6972,2.0277,2.549,Verrières-en-Anjou (49480),1.894,Bouxwiller (67330)
+2026-11-10T12:41:22.677372+00:00,npdc,gazole,428,2.1655,2.484,Étaples (62630),2.035,Bourbourg (59630)
+2026-11-10T12:41:22.677372+00:00,npdc,e10,373,1.9993,2.299,Douai (59500),1.903,La Sentinelle (59174)
