@@ -10051,3 +10051,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-11T10:30:32.591271+00:00,france,e10,7042,2.0226,2.529,Verrières-en-Anjou (49480),1.893,Petite-Forêt (59494)
 2026-11-11T10:30:32.591271+00:00,npdc,gazole,424,2.1576,2.484,Étaples (62630),2.025,Coudekerque-Branche (59210)
 2026-11-11T10:30:32.591271+00:00,npdc,e10,367,1.9944,2.299,Douai (59500),1.893,Petite-Forêt (59494)
+2026-11-11T11:00:32.624224+00:00,france,gazole,8638,2.1804,2.653,Levens (06670),1.999,Brou (28160)
+2026-11-11T11:00:32.624224+00:00,france,e10,7034,2.0226,2.529,Verrières-en-Anjou (49480),1.893,Petite-Forêt (59494)
+2026-11-11T11:00:32.624224+00:00,npdc,gazole,423,2.1571,2.484,Étaples (62630),2.025,Coudekerque-Branche (59210)
+2026-11-11T11:00:32.624224+00:00,npdc,e10,365,1.9941,2.299,Douai (59500),1.893,Petite-Forêt (59494)
