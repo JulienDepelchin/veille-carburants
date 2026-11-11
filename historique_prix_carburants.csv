@@ -10143,3 +10143,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-11T21:30:25.832945+00:00,france,e10,6821,2.0239,2.529,Verrières-en-Anjou (49480),1.893,Valenciennes (59300)
 2026-11-11T21:30:25.832945+00:00,npdc,gazole,418,2.1579,2.484,Étaples (62630),2.025,Coudekerque-Branche (59210)
 2026-11-11T21:30:25.832945+00:00,npdc,e10,357,1.9952,2.299,Douai (59500),1.893,Valenciennes (59300)
+2026-11-11T22:00:26.126677+00:00,france,gazole,8471,2.1813,2.653,Levens (06670),1.999,Brou (28160)
+2026-11-11T22:00:26.126677+00:00,france,e10,6820,2.0239,2.529,Verrières-en-Anjou (49480),1.893,Valenciennes (59300)
+2026-11-11T22:00:26.126677+00:00,npdc,gazole,418,2.1579,2.484,Étaples (62630),2.025,Coudekerque-Branche (59210)
+2026-11-11T22:00:26.126677+00:00,npdc,e10,357,1.9952,2.299,Douai (59500),1.893,Valenciennes (59300)
