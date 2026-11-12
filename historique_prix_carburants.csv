@@ -10299,3 +10299,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-12T16:00:25.379981+00:00,france,e10,7023,2.0167,2.989,Bouxwiller (67330),1.848,Vesoul (70000)
 2026-11-12T16:00:25.379981+00:00,npdc,gazole,439,2.1463,2.484,Étaples (62630),2.0,Grand-Fort-Philippe (59153)
 2026-11-12T16:00:25.379981+00:00,npdc,e10,381,1.9901,2.299,Douai (59500),1.893,Valenciennes (59300)
+2026-11-12T16:18:48.246378+00:00,france,gazole,8693,2.1709,2.653,Levens (06670),1.985,Grabels (34790)
+2026-11-12T16:18:48.246378+00:00,france,e10,7030,2.0165,2.989,Bouxwiller (67330),1.848,Vesoul (70000)
+2026-11-12T16:18:48.246378+00:00,npdc,gazole,439,2.146,2.484,Étaples (62630),2.0,Grand-Fort-Philippe (59153)
+2026-11-12T16:18:48.246378+00:00,npdc,e10,380,1.9901,2.299,Douai (59500),1.893,Valenciennes (59300)
