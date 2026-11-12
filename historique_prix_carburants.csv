@@ -10183,3 +10183,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-12T02:00:25.565935+00:00,france,e10,6827,2.0237,2.529,Verrières-en-Anjou (49480),1.89,La Colle-sur-Loup (06480)
 2026-11-12T02:00:25.565935+00:00,npdc,gazole,419,2.1576,2.484,Étaples (62630),2.025,Coudekerque-Branche (59210)
 2026-11-12T02:00:25.565935+00:00,npdc,e10,359,1.9947,2.299,Douai (59500),1.893,Valenciennes (59300)
+2026-11-12T02:30:25.564047+00:00,france,gazole,8480,2.181,2.653,Levens (06670),1.999,Le Grand-Quevilly (76120)
+2026-11-12T02:30:25.564047+00:00,france,e10,6826,2.0237,2.529,Verrières-en-Anjou (49480),1.89,La Colle-sur-Loup (06480)
+2026-11-12T02:30:25.564047+00:00,npdc,gazole,419,2.1576,2.484,Étaples (62630),2.025,Coudekerque-Branche (59210)
+2026-11-12T02:30:25.564047+00:00,npdc,e10,359,1.9947,2.299,Douai (59500),1.893,Valenciennes (59300)
