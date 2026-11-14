@@ -10583,3 +10583,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-14T00:31:00.437224+00:00,france,e10,7194,2.0049,2.509,Verrières-en-Anjou (49480),1.848,Vesoul (70000)
 2026-11-14T00:31:00.437224+00:00,npdc,gazole,437,2.1386,2.505,Étaples (62630),1.994,Arras (62000)
 2026-11-14T00:31:00.437224+00:00,npdc,e10,380,1.9831,2.299,Douai (59500),1.869,Bruay-la-Buissière (62700)
+2026-11-14T00:53:57.290990+00:00,france,gazole,8924,2.1602,2.666,Roussillon (38150),1.969,Les Sables-d'Olonne (85340)
+2026-11-14T00:53:57.290990+00:00,france,e10,7282,2.0034,2.509,Verrières-en-Anjou (49480),1.848,Vesoul (70000)
+2026-11-14T00:53:57.290990+00:00,npdc,gazole,443,2.1379,2.505,Étaples (62630),1.99,Arras (62000)
+2026-11-14T00:53:57.290990+00:00,npdc,e10,386,1.9819,2.299,Douai (59500),1.869,Bruay-la-Buissière (62700)
