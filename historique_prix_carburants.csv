@@ -10959,3 +10959,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-15T19:30:59.687663+00:00,france,e10,7031,2.0025,2.509,Verrières-en-Anjou (49480),1.854,Valréas (84600)
 2026-11-15T19:30:59.687663+00:00,npdc,gazole,433,2.1361,2.543,Étaples (62630),1.99,Coudekerque-Branche (59210)
 2026-11-15T19:30:59.687663+00:00,npdc,e10,365,1.981,2.249,Douai (59500),1.877,Wambrechies (59118)
+2026-11-15T20:00:53.622560+00:00,france,gazole,8759,2.1593,2.7,Roussillon (38150),1.969,Bourg-de-Péage (26300)
+2026-11-15T20:00:53.622560+00:00,france,e10,6998,2.0026,2.509,Verrières-en-Anjou (49480),1.854,Valréas (84600)
+2026-11-15T20:00:53.622560+00:00,npdc,gazole,429,2.137,2.543,Étaples (62630),1.99,Coudekerque-Branche (59210)
+2026-11-15T20:00:53.622560+00:00,npdc,e10,362,1.9812,2.249,Douai (59500),1.877,Wambrechies (59118)
