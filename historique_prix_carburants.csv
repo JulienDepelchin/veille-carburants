@@ -11083,3 +11083,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-16T10:01:03.720135+00:00,france,e10,7005,2.0001,2.509,Verrières-en-Anjou (49480),1.86,Wingles (62410)
 2026-11-16T10:01:03.720135+00:00,npdc,gazole,436,2.1368,2.543,Étaples (62630),1.99,Dunkerque (59640)
 2026-11-16T10:01:03.720135+00:00,npdc,e10,368,1.9796,2.249,Douai (59500),1.86,Wingles (62410)
+2026-11-16T10:31:05.656522+00:00,france,gazole,8783,2.1584,2.7,Roussillon (38150),1.969,Bourg-de-Péage (26300)
+2026-11-16T10:31:05.656522+00:00,france,e10,7002,2.0004,2.509,Verrières-en-Anjou (49480),1.86,Wingles (62410)
+2026-11-16T10:31:05.656522+00:00,npdc,gazole,436,2.1364,2.543,Étaples (62630),1.99,Dunkerque (59640)
+2026-11-16T10:31:05.656522+00:00,npdc,e10,368,1.9794,2.249,Douai (59500),1.86,Wingles (62410)
