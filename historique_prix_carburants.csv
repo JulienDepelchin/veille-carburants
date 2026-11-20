@@ -11875,3 +11875,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-20T07:20:39.518458+00:00,france,e10,7645,1.9772,2.479,Verrières-en-Anjou (49480),1.825,Fos-sur-Mer (13270)
 2026-11-20T07:20:39.518458+00:00,npdc,gazole,463,2.1266,2.484,Étaples (62630),1.99,Lens (62300)
 2026-11-20T07:20:39.518458+00:00,npdc,e10,409,1.9554,2.239,Havrincourt (62147),1.825,Lens (62300)
+2026-11-20T07:30:37.571229+00:00,france,gazole,9303,2.146,2.649,Roquestéron (06910),1.989,Plélan-le-Grand (35380)
+2026-11-20T07:30:37.571229+00:00,france,e10,7637,1.9776,2.479,Verrières-en-Anjou (49480),1.825,Fos-sur-Mer (13270)
+2026-11-20T07:30:37.571229+00:00,npdc,gazole,463,2.1273,2.484,Étaples (62630),1.99,Lens (62300)
+2026-11-20T07:30:37.571229+00:00,npdc,e10,409,1.9556,2.239,Havrincourt (62147),1.825,Lens (62300)
