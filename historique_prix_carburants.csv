@@ -11895,3 +11895,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-20T09:30:37.209234+00:00,france,e10,7648,1.975,2.479,Verrières-en-Anjou (49480),1.819,Saint-Jean-d'Angély (17400)
 2026-11-20T09:30:37.209234+00:00,npdc,gazole,465,2.1238,2.484,Étaples (62630),1.99,Lens (62300)
 2026-11-20T09:30:37.209234+00:00,npdc,e10,408,1.9528,2.239,Havrincourt (62147),1.825,Lens (62300)
+2026-11-20T10:00:38.233218+00:00,france,gazole,9319,2.141,2.649,Roquestéron (06910),1.929,Laon (02000)
+2026-11-20T10:00:38.233218+00:00,france,e10,7646,1.9736,2.479,Verrières-en-Anjou (49480),1.781,Vesoul (70000)
+2026-11-20T10:00:38.233218+00:00,npdc,gazole,465,2.1222,2.484,Étaples (62630),1.963,Wingles (62410)
+2026-11-20T10:00:38.233218+00:00,npdc,e10,408,1.952,2.239,Havrincourt (62147),1.818,Wingles (62410)
