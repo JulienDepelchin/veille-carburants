@@ -12627,3 +12627,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-23T23:00:42.376126+00:00,france,e10,7470,1.9599,2.919,Flixecourt (80420),1.79,Vesoul (70000)
 2026-11-23T23:00:42.376126+00:00,npdc,gazole,461,2.1044,2.484,Étaples (62630),1.957,Wingles (62410)
 2026-11-23T23:00:42.376126+00:00,npdc,e10,400,1.9406,2.209,Grande-Synthe (59760),1.808,Lens (62300)
+2026-11-23T23:30:41.785034+00:00,france,gazole,9219,2.1238,2.649,Roquestéron (06910),1.956,Les Sables-d'Olonne (85340)
+2026-11-23T23:30:41.785034+00:00,france,e10,7469,1.9599,2.919,Flixecourt (80420),1.79,Vesoul (70000)
+2026-11-23T23:30:41.785034+00:00,npdc,gazole,461,2.1043,2.484,Étaples (62630),1.957,Wingles (62410)
+2026-11-23T23:30:41.785034+00:00,npdc,e10,400,1.9406,2.209,Grande-Synthe (59760),1.808,Lens (62300)
