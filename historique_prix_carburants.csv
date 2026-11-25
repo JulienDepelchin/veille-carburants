@@ -12967,3 +12967,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-25T15:00:31.893933+00:00,france,e10,7668,1.9476,2.919,Flixecourt (80420),1.752,Villebon-sur-Yvette (91140)
 2026-11-25T15:00:31.893933+00:00,npdc,gazole,471,2.073,2.484,Étaples (62630),1.91,Wingles (62410)
 2026-11-25T15:00:31.893933+00:00,npdc,e10,409,1.9292,2.199,Grande-Synthe (59760),1.795,Wingles (62410)
+2026-11-25T15:30:30.986686+00:00,france,gazole,9377,2.0963,2.649,Roquestéron (06910),1.833,Marseille (13015)
+2026-11-25T15:30:30.986686+00:00,france,e10,7671,1.9474,2.919,Flixecourt (80420),1.752,Villebon-sur-Yvette (91140)
+2026-11-25T15:30:30.986686+00:00,npdc,gazole,471,2.0728,2.484,Étaples (62630),1.91,Wingles (62410)
+2026-11-25T15:30:30.986686+00:00,npdc,e10,410,1.9289,2.199,Grande-Synthe (59760),1.795,Wingles (62410)
