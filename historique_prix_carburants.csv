@@ -13139,3 +13139,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-26T12:00:30.932804+00:00,france,e10,7705,1.9415,2.919,Flixecourt (80420),1.738,Villebon-sur-Yvette (91140)
 2026-11-26T12:00:30.932804+00:00,npdc,gazole,471,2.0587,2.484,Étaples (62630),1.892,Lens (62300)
 2026-11-26T12:00:30.932804+00:00,npdc,e10,411,1.9229,2.199,Grande-Synthe (59760),1.781,Lens (62300)
+2026-11-26T12:30:35.404047+00:00,france,gazole,9415,2.0844,2.649,Roquestéron (06910),1.833,Marseille (13015)
+2026-11-26T12:30:35.404047+00:00,france,e10,7703,1.9417,2.919,Flixecourt (80420),1.738,Villebon-sur-Yvette (91140)
+2026-11-26T12:30:35.404047+00:00,npdc,gazole,470,2.059,2.484,Étaples (62630),1.892,Lens (62300)
+2026-11-26T12:30:35.404047+00:00,npdc,e10,410,1.9228,2.199,Grande-Synthe (59760),1.781,Lens (62300)
