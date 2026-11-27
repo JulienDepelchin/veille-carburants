@@ -13287,3 +13287,7 @@ horodatage_utc,perimetre,carburant,n,prix_moyen,prix_max,station_max,prix_min,st
 2026-11-27T05:00:21.181427+00:00,france,e10,7689,1.9367,2.917,Guénange (57310),1.749,Pontault-Combault (77340)
 2026-11-27T05:00:21.181427+00:00,npdc,gazole,469,2.0527,2.484,Étaples (62630),1.872,Lillers (62190)
 2026-11-27T05:00:21.181427+00:00,npdc,e10,410,1.9164,2.199,Grande-Synthe (59760),1.783,Lens (62300)
+2026-11-27T05:30:21.583236+00:00,france,gazole,9406,2.0793,2.649,Roquestéron (06910),1.833,Marseille (13015)
+2026-11-27T05:30:21.583236+00:00,france,e10,7690,1.9367,2.917,Guénange (57310),1.749,Pontault-Combault (77340)
+2026-11-27T05:30:21.583236+00:00,npdc,gazole,469,2.0525,2.484,Étaples (62630),1.872,Lillers (62190)
+2026-11-27T05:30:21.583236+00:00,npdc,e10,410,1.916,2.199,Grande-Synthe (59760),1.783,Lens (62300)
